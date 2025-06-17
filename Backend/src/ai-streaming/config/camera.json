@@ -1,0 +1,4070 @@
+[
+    {
+      "camera_id": "LH-HV-LL_CAM-01",
+      "camera_name": "LH-HV-LL_CAM-01",
+      "area_id": "LH-HV-LL",
+      "area_name": "N\u00fat giao H\u00f9ng V\u01b0\u01a1ng \u2013 L\u00ea L\u1ee3i",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57845_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473132"
+    },
+    {
+      "camera_id": "LH-HV-LL_CAM-02",
+      "camera_name": "LH-HV-LL_CAM-02",
+      "area_id": "LH-HV-LL",
+      "area_name": "N\u00fat giao H\u00f9ng V\u01b0\u01a1ng \u2013 L\u00ea L\u1ee3i",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57948_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473160"
+    },
+    {
+      "camera_id": "LH-HV-LL_CAM-03",
+      "camera_name": "LH-HV-LL_CAM-03",
+      "area_id": "LH-HV-LL",
+      "area_name": "N\u00fat giao H\u00f9ng V\u01b0\u01a1ng \u2013 L\u00ea L\u1ee3i",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=58051_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473163"
+    },
+    {
+      "camera_id": "LH-HV-LL_CAM-04",
+      "camera_name": "LH-HV-LL_CAM-04",
+      "area_id": "LH-HV-LL",
+      "area_name": "N\u00fat giao H\u00f9ng V\u01b0\u01a1ng \u2013 L\u00ea L\u1ee3i",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=58154_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473176"
+    },
+    {
+      "camera_id": "LH-HV-LL_CAM-05",
+      "camera_name": "LH-HV-LL_CAM-05",
+      "area_id": "LH-HV-LL",
+      "area_name": "N\u00fat giao H\u00f9ng V\u01b0\u01a1ng \u2013 L\u00ea L\u1ee3i",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=58257_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473178"
+    },
+    {
+      "camera_id": "LH-HV-LL_CAM-06",
+      "camera_name": "LH-HV-LL_CAM-06",
+      "area_id": "LH-HV-LL",
+      "area_name": "N\u00fat giao H\u00f9ng V\u01b0\u01a1ng \u2013 L\u00ea L\u1ee3i",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=58360_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473180"
+    },
+    {
+      "camera_id": "LH-LTT-DK_CAM-01",
+      "camera_name": "LH-LTT-DK_CAM-01",
+      "area_id": "LH-LTT-DK",
+      "area_name": "THGT \u0111i\u1ec3m giao \u0111\u01b0\u1eddng L\u00fd Th\u00e1i T\u1ed5 - \u0110\u1ed3ng Kh\u1edfi",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57433_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473182"
+    },
+    {
+      "camera_id": "LH-LTT-DK_CAM-02",
+      "camera_name": "LH-LTT-DK_CAM-02",
+      "area_id": "LH-LTT-DK",
+      "area_name": "THGT \u0111i\u1ec3m giao \u0111\u01b0\u1eddng L\u00fd Th\u00e1i T\u1ed5 - \u0110\u1ed3ng Kh\u1edfi",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57536_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473183"
+    },
+    {
+      "camera_id": "LH-LTT-DK_CAM-03",
+      "camera_name": "LH-LTT-DK_CAM-03",
+      "area_id": "LH-LTT-DK",
+      "area_name": "THGT \u0111i\u1ec3m giao \u0111\u01b0\u1eddng L\u00fd Th\u00e1i T\u1ed5 - \u0110\u1ed3ng Kh\u1edfi",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57639_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473185"
+    },
+    {
+      "camera_id": "LH-LTT-DK_CAM-04",
+      "camera_name": "LH-LTT-DK_CAM-04",
+      "area_id": "LH-LTT-DK",
+      "area_name": "THGT \u0111i\u1ec3m giao \u0111\u01b0\u1eddng L\u00fd Th\u00e1i T\u1ed5 - \u0110\u1ed3ng Kh\u1edfi",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57742_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473187"
+    },
+    {
+      "camera_id": "LH-LTT-HV_CAM-01",
+      "camera_name": "LH-LTT-HV_CAM-01",
+      "area_id": "LH-LTT-HV",
+      "area_name": "THGT \u0111i\u1ec3m giao \u0111\u01b0\u1eddng L\u00fd Th\u00e1i T\u1ed5 - H\u00f9ng V\u01b0\u01a1ng",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57127_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473189"
+    },
+    {
+      "camera_id": "LH-LTT-HV_CAM-02",
+      "camera_name": "LH-LTT-HV_CAM-02",
+      "area_id": "LH-LTT-HV",
+      "area_name": "THGT \u0111i\u1ec3m giao \u0111\u01b0\u1eddng L\u00fd Th\u00e1i T\u1ed5 - H\u00f9ng V\u01b0\u01a1ng",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57227_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473190"
+    },
+    {
+      "camera_id": "LH-LTT-HV_CAM-03",
+      "camera_name": "LH-LTT-HV_CAM-03",
+      "area_id": "LH-LTT-HV",
+      "area_name": "THGT \u0111i\u1ec3m giao \u0111\u01b0\u1eddng L\u00fd Th\u00e1i T\u1ed5 - H\u00f9ng V\u01b0\u01a1ng",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=69069_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473192"
+    },
+    {
+      "camera_id": "LH-LTT-HV_CAM-04",
+      "camera_name": "LH-LTT-HV_CAM-04",
+      "area_id": "LH-LTT-HV",
+      "area_name": "THGT \u0111i\u1ec3m giao \u0111\u01b0\u1eddng L\u00fd Th\u00e1i T\u1ed5 - H\u00f9ng V\u01b0\u01a1ng",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=62040_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473193"
+    },
+    {
+      "camera_id": "LH-NKKN-LD_CAM-01",
+      "camera_name": "LH-NKKN-LD_CAM-01",
+      "area_id": "LH-NKKN-LD",
+      "area_name": "Ng\u00e3 t\u01b0 Nam K\u1ef3 Kh\u1edfi Ngh\u0129a - L\u00ea Du\u1ea9n",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=59390_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473195"
+    },
+    {
+      "camera_id": "LH-NKKN-LD_CAM-02",
+      "camera_name": "LH-NKKN-LD_CAM-02",
+      "area_id": "LH-NKKN-LD",
+      "area_name": "Ng\u00e3 t\u01b0 Nam K\u1ef3 Kh\u1edfi Ngh\u0129a - L\u00ea Du\u1ea9n",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=59493_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473197"
+    },
+    {
+      "camera_id": "LH-NKKN-LD_CAM-03",
+      "camera_name": "LH-NKKN-LD_CAM-03",
+      "area_id": "LH-NKKN-LD",
+      "area_name": "Ng\u00e3 t\u01b0 Nam K\u1ef3 Kh\u1edfi Ngh\u0129a - L\u00ea Du\u1ea9n",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=59596_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473198"
+    },
+    {
+      "camera_id": "LH-NKKN-LD_CAM-04",
+      "camera_name": "LH-NKKN-LD_CAM-04",
+      "area_id": "LH-NKKN-LD",
+      "area_name": "Ng\u00e3 t\u01b0 Nam K\u1ef3 Kh\u1edfi Ngh\u0129a - L\u00ea Du\u1ea9n",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=59699_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473214"
+    },
+    {
+      "camera_id": "LH-NVL-HVL_CAM-01",
+      "camera_name": "LH-NVL-HVL_CAM-01",
+      "area_id": "LH-NVL-HVL",
+      "area_name": "Ng\u00e3 t\u01b0 Nguy\u1ec5n V\u0103n Linh - Hu\u1ef3nh V\u0103n L\u0169y",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=58978_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473216"
+    },
+    {
+      "camera_id": "LH-NVL-HVL_CAM-02",
+      "camera_name": "LH-NVL-HVL_CAM-02",
+      "area_id": "LH-NVL-HVL",
+      "area_name": "Ng\u00e3 t\u01b0 Nguy\u1ec5n V\u0103n Linh - Hu\u1ef3nh V\u0103n L\u0169y",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=59081_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473218"
+    },
+    {
+      "camera_id": "LH-NVL-HVL_CAM-03",
+      "camera_name": "LH-NVL-HVL_CAM-03",
+      "area_id": "LH-NVL-HVL",
+      "area_name": "Ng\u00e3 t\u01b0 Nguy\u1ec5n V\u0103n Linh - Hu\u1ef3nh V\u0103n L\u0169y",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=59184_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473229"
+    },
+    {
+      "camera_id": "LH-NVL-HVL_CAM-04",
+      "camera_name": "LH-NVL-HVL_CAM-04",
+      "area_id": "LH-NVL-HVL",
+      "area_name": "Ng\u00e3 t\u01b0 Nguy\u1ec5n V\u0103n Linh - Hu\u1ef3nh V\u0103n L\u0169y",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=59287_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473231"
+    },
+    {
+      "camera_id": "LH-NVL-VNG_CAM-01",
+      "camera_name": "LH-NVL-VNG_CAM-01",
+      "area_id": "LH-NVL-VNG",
+      "area_name": "N\u00fat giao Nguy\u1ec5n V\u0103n Linh \u2013 V\u00f5 Nguy\u00ean Gi\u00e1p",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=58463_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473233"
+    },
+    {
+      "camera_id": "LH-NVL-VNG_CAM-02",
+      "camera_name": "LH-NVL-VNG_CAM-02",
+      "area_id": "LH-NVL-VNG",
+      "area_name": "N\u00fat giao Nguy\u1ec5n V\u0103n Linh \u2013 V\u00f5 Nguy\u00ean Gi\u00e1p",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=58566_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473234"
+    },
+    {
+      "camera_id": "LH-NVL-VNG_CAM-03",
+      "camera_name": "LH-NVL-VNG_CAM-03",
+      "area_id": "LH-NVL-VNG",
+      "area_name": "N\u00fat giao Nguy\u1ec5n V\u0103n Linh \u2013 V\u00f5 Nguy\u00ean Gi\u00e1p",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=58669_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473236"
+    },
+    {
+      "camera_id": "LH-NVL-VNG_CAM-04",
+      "camera_name": "LH-NVL-VNG_CAM-04",
+      "area_id": "LH-NVL-VNG",
+      "area_name": "N\u00fat giao Nguy\u1ec5n V\u0103n Linh \u2013 V\u00f5 Nguy\u00ean Gi\u00e1p",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=58772_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473238"
+    },
+    {
+      "camera_id": "LH-VNG-LL_CAM-01",
+      "camera_name": "LH-VNG-LL_CAM-01",
+      "area_id": "LH-VNG-LL",
+      "area_name": "Ng\u00e3 t\u01b0 V\u00f5 Nguy\u00ean Gi\u00e1p \u2013 L\u00ea L\u1ee3i",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=59802_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473240"
+    },
+    {
+      "camera_id": "LH-VNG-LL_CAM-02",
+      "camera_name": "LH-VNG-LL_CAM-02",
+      "area_id": "LH-VNG-LL",
+      "area_name": "Ng\u00e3 t\u01b0 V\u00f5 Nguy\u00ean Gi\u00e1p \u2013 L\u00ea L\u1ee3i",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=59905_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473242"
+    },
+    {
+      "camera_id": "LH-VNG-LL_CAM-03",
+      "camera_name": "LH-VNG-LL_CAM-03",
+      "area_id": "LH-VNG-LL",
+      "area_name": "Ng\u00e3 t\u01b0 V\u00f5 Nguy\u00ean Gi\u00e1p \u2013 L\u00ea L\u1ee3i",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=60008_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473243"
+    },
+    {
+      "camera_id": "LH-VNG-LL_CAM-04",
+      "camera_name": "LH-VNG-LL_CAM-04",
+      "area_id": "LH-VNG-LL",
+      "area_name": "Ng\u00e3 t\u01b0 V\u00f5 Nguy\u00ean Gi\u00e1p \u2013 L\u00ea L\u1ee3i",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=60111_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473245"
+    },
+    {
+      "camera_id": "LH-VVK-HV_CAM-01",
+      "camera_name": "LH-VVK-HV_CAM-01",
+      "area_id": "LH-VVK-HV",
+      "area_name": "Ng\u00e3 t\u01b0 V\u00f5 V\u0103n Ki\u1ec7t \u2013 H\u00f9ng V\u01b0\u01a1ng",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=60214_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473261"
+    },
+    {
+      "camera_id": "LH-VVK-HV_CAM-02",
+      "camera_name": "LH-VVK-HV_CAM-02",
+      "area_id": "LH-VVK-HV",
+      "area_name": "Ng\u00e3 t\u01b0 V\u00f5 V\u0103n Ki\u1ec7t \u2013 H\u00f9ng V\u01b0\u01a1ng",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=60317_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473263"
+    },
+    {
+      "camera_id": "LH-VVK-HV_CAM-03",
+      "camera_name": "LH-VVK-HV_CAM-03",
+      "area_id": "LH-VVK-HV",
+      "area_name": "Ng\u00e3 t\u01b0 V\u00f5 V\u0103n Ki\u1ec7t \u2013 H\u00f9ng V\u01b0\u01a1ng",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=60420_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473264"
+    },
+    {
+      "camera_id": "LH-VX-HVL_CAM-01",
+      "camera_name": "LH-VX-HVL_CAM-01",
+      "area_id": "LH-VX-HVL",
+      "area_name": "V\u00f2ng xoay Hu\u1ef3nh V\u0103n L\u0169y",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=60523_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473266"
+    },
+    {
+      "camera_id": "LH-VX-HVL_CAM-02",
+      "camera_name": "LH-VX-HVL_CAM-02",
+      "area_id": "LH-VX-HVL",
+      "area_name": "V\u00f2ng xoay Hu\u1ef3nh V\u0103n L\u0169y",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=60626_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473267"
+    },
+    {
+      "camera_id": "LH-VX-HVL_CAM-04",
+      "camera_name": "LH-VX-HVL_CAM-04",
+      "area_id": "LH-VX-HVL",
+      "area_name": "V\u00f2ng xoay Hu\u1ef3nh V\u0103n L\u0169y",
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=60729_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+      "services": {
+        "vehicle_counting": {
+          "lines": [
+            {
+              "name": "line_1",
+              "start": [
+                0.1,
+                0.6
+              ],
+              "end": [
+                0.9,
+                0.6
+              ],
+              "trigger_wrong_direction": 1
+            }
+          ],
+          "polygons": [],
+          "enable": true
+        },
+        "crowd_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "license_plate": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "reidentify": {
+          "lines": [],
+          "polygons": [
+            {
+              "name": "zone_1",
+              "zone": [
+                [
+                  0,
+                  0.3
+                ],
+                [
+                  1,
+                  0.3
+                ],
+                [
+                  1,
+                  0.98
+                ],
+                [
+                  0,
+                  0.98
+                ]
+              ]
+            }
+          ],
+          "enable": true
+        },
+        "speed_estimate": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "traffic_light": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        },
+        "wrong_lane": {
+          "lines": [],
+          "polygons": [],
+          "enable": true,
+          "no-allow": []
+        },
+        "accident_detection": {
+          "lines": [],
+          "polygons": [],
+          "enable": true
+        }
+      },
+      "status": true,
+      "created_at": "2025-04-12T16:30:23.473269"
+    }
+  ]

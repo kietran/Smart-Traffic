@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package lpr;
+
+service LPRServiceBase64 {
+  rpc PredictBase64 (PredictBase64Request) returns (PredictBase64Response);
+}
+service LPRServiceBatchBase64 {
+  rpc PredictBatchBase64 (PredictBatchBase64Request) returns (PredictBatchBase64Response);
+}
+
+
+message PredictBatchBase64Request {
+  repeated string image = 1;          
+  bool detect_color = 2;     
+  bool detect_logo = 3;     
+}
+message PredictBatchBase64Response {
+  repeated string plate = 1;            
+  repeated string license_number = 2;    
+  repeated string color = 3;            
+  repeated string logo = 4;            
+}
+
+message PredictBase64Request {
+  string image = 1;          
+  bool detect_color = 2;     
+  bool detect_logo = 3;         
+}
+
+message PredictBase64Response {
+  string plate = 1;            
+  string license_number = 2;    
+  string color = 3;    
+string logo = 4;          
+}
+

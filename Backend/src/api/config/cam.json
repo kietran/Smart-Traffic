@@ -1,0 +1,194 @@
+{
+
+    "LH-HV-LL_CAM-01": {
+        "id": "57845_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-HV-LL_CAM-02": {
+        "id": "57948_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-HV-LL_CAM-03": {
+        "id": "58051_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-HV-LL_CAM-04": {
+        "id": "58154_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-HV-LL_CAM-05": {
+        "id": "95012_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-HV-LL_CAM-06": {
+        "id": "58360_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-LTT-DK_CAM-01": {
+        "id": "57433_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-LTT-DK_CAM-02": {
+        "id": "57536_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-LTT-DK_CAM-03": {
+        "id": "57639_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-LTT-DK_CAM-04": {
+        "id": "57742_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-LTT-HV_CAM-01": {
+        "id": "57127_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-LTT-HV_CAM-02": {
+        "id": "57227_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-LTT-HV_CAM-03": {
+        "id": "69069_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-LTT-HV_CAM-04": {
+        "id": "62040_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NKKN-LD_CAM-01": {
+        "id": "59390_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NKKN-LD_CAM-02": {
+        "id": "59493_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NKKN-LD_CAM-03": {
+        "id": "59596_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NKKN-LD_CAM-04": {
+        "id": "59699_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NVL-HVL_CAM-01": {
+        "id": "58978_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NVL-HVL_CAM-03": {
+        "id": "59184_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NVL-HVL_CAM-04": {
+        "id": "59287_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NVL-VNG_CAM-01": {
+        "id": "58463_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NVL-VNG_CAM-02": {
+        "id": "58566_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NVL-VNG_CAM-03": {
+        "id": "58669_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-NVL-VNG_CAM-04": {
+        "id": "58772_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-TBC_CAM-01": {
+        "id": "58875_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 3,
+        "station_id": 3
+    },
+    "LH-VNG-LL_CAM-01": {
+        "id": "59802_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VNG-LL_CAM-02": {
+        "id": "59905_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VNG-LL_CAM-03": {
+        "id": "60008_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VNG-LL_CAM-04": {
+        "id": "60111_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VVK-HV_CAM-01": {
+        "id": "60214_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VVK-HV_CAM-02": {
+        "id": "60317_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VVK-HV_CAM-03": {
+        "id": "60420_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VVK-HV_PTZ-01": {
+        "id": "127594_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VX.HVL_CAM-01": {
+        "id": "60523_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VX.HVL_CAM-02": {
+        "id": "60626_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VX.HVL_CAM-04": {
+        "id": "60729_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    },
+    "LH-VX.HVL_PTZ-01": {
+        "id": "73181_923e7292-7415-424d-90db-f575a44828bf",
+        "status": 1,
+        "station_id": 3
+    }
+ 
+}
