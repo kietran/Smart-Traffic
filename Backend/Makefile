@@ -43,10 +43,6 @@ run-hls-stream:
 	@docker compose -f ./deployment/docker-compose.yml --env-file .env up hls-stream -d --build 
 	@echo "Application started."
 
-run-reid:
-	@docker compose -f ./deployment/docker-compose.yml --env-file .env up reid -d --build 
-	@echo "Application started."
-
 run-kafka-ui:
 	@docker compose -f ./deployment/docker-compose.yml --env-file .env up kafka-ui -d --build 
 	@echo "Application started."

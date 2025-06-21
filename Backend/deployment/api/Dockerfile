@@ -2,10 +2,11 @@ FROM python:3.12.4-slim-bullseye
 
 WORKDIR /app
 
-RUN pip install --upgrade pip
+COPY uv.lock pyproject.toml .python-version ./
 
-COPY ./deployment/api/requirements.txt .
-RUN pip install -r requirements.txt --timeout=1000 --no-cache-dir
+RUN pip install uv
 
-COPY ./deployment/api/requirements-2.txt .
-RUN pip install -r requirements-2.txt --timeout=1000 --no-cache-dir
+ENV UV_HTTP_TIMEOUT=1000
+ENV UV_LINK_MODE=copy
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen

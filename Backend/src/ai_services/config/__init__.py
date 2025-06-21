@@ -16,18 +16,10 @@ REDIS_HOST = os.getenv("REDIS_HOST", "127.0.0.1")
 REDIS_PORT = os.getenv("REDIS_PORT", "6379")
 WS_ENDPOINT = os.getenv("WS_ENDPOINT", "ws://127.0.0.1:8001/events")
 
-REID_HOST = os.getenv("REID_HOST", "127.0.0.1")
-REID_PORT = int(os.getenv("REID_PORT", "5123"))
-
 LPR_HOST = os.getenv("LPR_HOST", "127.0.0.1")
 LPR_PORT = os.getenv("LPR_PORT", "9999")
-LPR_GRPC_PORT = os.getenv("LPR_GRPC_PORT", "50051")
-
 
 KAFKA_SERVER = os.getenv("KAFKA_SERVER", "127.0.0.1:9092")
-
-CROWD_MINIMUM_NUMBER = int(os.getenv("CROWD_MINIMUM_NUMBER", "5"))
-CROWD_MINIMUM_DISTANCE = int(os.getenv("CROWD_MINIMUM_DISTANCE", "200"))
 
 MONGO_DATABASE = os.getenv("MONGO_DATABASE", "nano")
 MONGO_HOST = os.getenv("MONGO_HOST", "0.0.0.0")

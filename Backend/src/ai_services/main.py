@@ -11,18 +11,15 @@ from utils.draw import ServicesDrawer
 import redis
 from config import REDIS_HOST, REDIS_PORT
 from modules.lpr_tracker import LPRTracker
-from modules.reid_tracker import REIDTracker
 from camera import FrameQueue
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import ProcessPoolExecutor, wait, FIRST_COMPLETED
 
 from modules.services import (
-    handle_crowd_detection,
     handle_vehicle_counting,
     handle_license_plate,
     handle_speed_estimate,
-    handle_reid,
     handle_traffic_light,
     handle_wrong_lane,
 )
@@ -42,13 +39,11 @@ from collections import defaultdict
 
 
 SERVICE_MAP = {
-    "crowd_detection": handle_crowd_detection,
     "vehicle_counting": handle_vehicle_counting,
     "license_plate": handle_license_plate,
-    # "speed_estimate": handle_speed_estimate,
-    "reidentify": handle_reid,
-    # "traffic_light": handle_traffic_light,
-    # "wrong_lane": handle_wrong_lane,
+    "speed_estimate": handle_speed_estimate,
+    "traffic_light": handle_traffic_light,
+    "wrong_lane": handle_wrong_lane,
 }
 MAX_PENDING = 12
 def run_services(
@@ -83,8 +78,6 @@ def run_services(
             org_drawer = services_drawer["org_size"].drawer.get(service_name)
             if service_name == "license_plate":
                 tracker = lpr_tracker
-            elif service_name == "reidentify":
-                tracker = reid_tracker
             elif service_name == "speed_estimate":
                 tracker = view_transformer
                 vga_drawer = services_drawer["vga_size"].drawer.get("license_plate")
@@ -199,9 +192,7 @@ def start(
     producer = Producer(producer_config)
 
     lpr_tracker = LPRTracker()
-    reid_tracker = REIDTracker()
     lpr_tracker.start()
-    reid_tracker.start()
 
     SOURCE = np.array(
         service_info_scaled["license_plate"]["polygons"][0]["zone"]
@@ -242,7 +233,7 @@ def start(
             ikey,
             timestamp,
             lpr_tracker,
-            reid_tracker,
+            None,
             view_transformer,
             trigger_threads,
             stop_events,

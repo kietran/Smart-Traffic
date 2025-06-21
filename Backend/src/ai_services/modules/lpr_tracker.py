@@ -49,7 +49,7 @@ class LPRTracker(multiprocessing.Process):
         interval_track=10,
         iterval_summary=1,
         iterval_lpr_update=1,
-        use_grpc=True,
+        use_grpc=False,
     ):
         super(LPRTracker, self).__init__()
         self.interval_track = interval_track

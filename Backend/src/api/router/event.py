@@ -52,14 +52,11 @@ router = APIRouter()
 manager = WebsocketManager()
 
 EVENTS_TYPE = [
-    "crowd_detection",
     "vehicle_counting",
     "license_plate",
-    "reidentify",
     "speed_estimate",
 ]
 ALERT_TYPE = [
-    "crowd_detection",
     "traffic_light",
     "wrong_lane",
     "wrong_direction",
@@ -140,7 +137,7 @@ async def create_event(
         item_data["start_time"] = item_data["start_time"].isoformat()
         item_data["end_time"] = item_data["end_time"].isoformat()
         item_data.pop("_id", None)
-        if (payload.event_type in ["traffic_light", "accident_detection", "wrong_lane", "wrong_direction", "crowd_detection"]):
+        if (payload.event_type in ["traffic_light", "accident_detection", "wrong_lane", "wrong_direction"]):
             item_data["is_alert"] = True
             
         await manager.broadcast(item_data)

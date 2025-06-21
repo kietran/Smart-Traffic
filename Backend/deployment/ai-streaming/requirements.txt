@@ -1,7 +1,7 @@
-ultralytics==8.3.11
-supervision==0.21.0
-confluent_kafka==2.5.3
-redis==5.0.4
+ultralytics==8.3.157
+supervision==0.22.0
+confluent-kafka
+redis
 python-dotenv==1.0.1
 pymongo
 rich

@@ -19,3 +19,4 @@ msgpack
 python-multipart
 pymongo
 python-dotenv==1.0.1
+minio
