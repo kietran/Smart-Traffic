@@ -1,0 +1,15 @@
+.upload {
+  border: 1px dashed black;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: pink;
+  position: absolute;
+  // overflow-y: auto;
+}
+.camera {
+  &:hover {
+    cursor: pointer;
+    border: 1px dashed black;
+  }
+}

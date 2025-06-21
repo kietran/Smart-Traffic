@@ -1,0 +1,17 @@
+.camera-drawer {
+  #sidebar {
+    background-color: rgba(0, 0, 0, 0.443);
+    height: fit-content !important;
+    .dropdown-btn {
+      background-color: transparent;
+      color: white;
+      font-weight: 700;
+      text-align: center;
+      font-size: 18px;
+      outline: none;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}

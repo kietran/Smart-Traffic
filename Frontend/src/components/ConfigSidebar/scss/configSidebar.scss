@@ -1,0 +1,32 @@
+.config-sidebar{
+    width: 300px !important;
+    display: flex;
+    flex-direction: column;
+    position: absolute !important;
+    top: 0;
+    right: 0;
+
+    left: unset !important;
+
+    .tool-content{
+        overflow-y: auto !important;
+        flex: 1;
+    }
+
+    .sub-menu a{
+            background-color: transparent !important;
+            &:hover{
+                background-color: transparent !important;
+            }
+
+
+    }
+    #line-list, #zone-list{
+        li{
+            &:hover{
+                background-color: rgb(95, 85, 85);
+            }
+        }
+        
+    }
+}

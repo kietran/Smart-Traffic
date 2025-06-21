@@ -1,0 +1,25 @@
+name: nano-frontend
+services:
+  frontend:
+    container_name: nano-frontend
+    image: frontend:v1.0.0
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile
+    volumes:
+      - ../:/app
+    ports:
+      - "8002:5173"
+    networks:
+      - nano
+    tty: true
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+    command: npm run dev
+networks:
+  nano:
+    name: nano
+    driver: bridge
