@@ -186,11 +186,9 @@ if __name__ == "__main__":
     preprocess_outputs = (None, None, None, None, None, None)
     batch_ref_id = 0
     # Load model
-    net = YOLO("src/ai-streaming/models/detect/CHECKPOINTCCCCCCC.engine")
+    net = YOLO("src/ai-streaming/models/detect/CHECKPOINTCCCCCCC.pt")
 
-    mongo_client = pymongo.MongoClient(
-        "mongodb://admin:anh123@100.112.243.28:27010/?authSource=admin"
-    )
+    mongo_client = pymongo.MongoClient(MONGODB_SERVER)
     metadata = mongo_client["nano"]["camera"]
     metadata = list(metadata.find({}))
     logger.info(f"Connected to mongodb: {MONGODB_SERVER}!")

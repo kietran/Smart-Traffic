@@ -79,16 +79,13 @@ function Analysis() {
 
   const format_event = (event) => {
     event.full_thumbnail_path = event.full_thumbnail_path?.replace(
-        "192.168.101.4",
-        "100.112.243.28"
+        "100.65.31.128"
       );
       event.target_thumbnail_path = event.target_thumbnail_path?.replace(
-        "192.168.101.4",
-        "100.112.243.28"
+        "100.65.31.128"
       );
       event.data.plate_thumb_path = event.data.plate_thumb_path?.replace(
-        "192.168.101.4",
-        "100.112.243.28"
+        "100.65.31.128"
       );
       let start_time = event.start_time;
       if (typeof start_time === "number") {
