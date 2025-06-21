@@ -8,8 +8,7 @@ import time
 from collections import defaultdict, Counter
 from scipy.spatial import distance
 from utils.logger import logger
-from utils.grpc.gprc_client import gRPCClient
-from config import LPR_HOST, LPR_PORT, LPR_GRPC_PORT, REDIS_HOST, REDIS_PORT
+from config import LPR_HOST, LPR_PORT, REDIS_HOST, REDIS_PORT
 import multiprocessing
 import supervision as sv
 import os
@@ -49,7 +48,6 @@ class LPRTracker(multiprocessing.Process):
         interval_track=10,
         iterval_summary=1,
         iterval_lpr_update=1,
-        use_grpc=True,
     ):
         super(LPRTracker, self).__init__()
         self.interval_track = interval_track
@@ -71,7 +69,6 @@ class LPRTracker(multiprocessing.Process):
         self.summary_lpr = defaultdict(dict)
         self.vehicle_summary_attribute = defaultdict(default_vehicle_summary_attribute)
         self.violation_ids = defaultdict(dict)
-        self.use_grpc = use_grpc
         new_loop = asyncio.new_event_loop()
         asyncio.set_event_loop(new_loop)
         self.img_queue = multiprocessing.Queue(maxsize=20)
@@ -87,9 +84,6 @@ class LPRTracker(multiprocessing.Process):
 
 
     def run(self):
-        self.grpc_client = (
-            gRPCClient(LPR_HOST, LPR_GRPC_PORT) if self.use_grpc else None
-        )
         self.redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=0)
 
         asyncio.run(self.loop())
@@ -189,43 +183,26 @@ class LPRTracker(multiprocessing.Process):
                         buffer["cropped_frame"][idx] = None
 
                 if buffer_frames:
-                    if self.grpc_client is not None:
-                        results = self.grpc_client.send_batch(buffer_frames)
-                        if results is None:
-                            logger.warning("gRPC response is None")
-                            return
-                        for idx, license_number, plate, color, logo in zip(
-                            indices, results.license_number, results.plate, results.color, results.logo
-                        ):
-                            if not plate:
-                                continue
-                            plate_img = base64_to_cv2_image(plate)
-                            if idx < len(buffer["license_plate"]):
-                                buffer["license_plate"][idx] = license_number
-                                buffer["plate_img"][idx] = plate_img
-                                buffer["v_color"][idx] = color
-                                buffer["logo"][idx] = logo
-                    else:
-                        results = await process_license_plate_batch(
-                            buffer_frames, self.session
-                        )
-                        
-                        if results is None:
-                            logger.warning("process_license_plate_batch response is None")
-                            return
-                        for idx, result in zip(
-                            indices, results
-                        ):
-                            license_number = result["license_number"]
-                            color = result["color"]
-                            if not result['plate']:
-                                continue
-                            plate_img = base64_to_cv2_image(result['plate'])
-                            if idx < len(buffer["license_plate"]):
-                                buffer["license_plate"][idx] = license_number
-                                buffer["plate_img"][idx] = plate_img
-                                buffer["v_color"][idx] = color
-                                buffer["logo"][idx] = ""
+                    results = await process_license_plate_batch(
+                        buffer_frames, self.session
+                    )
+                    
+                    if results is None:
+                        logger.warning("process_license_plate_batch response is None")
+                        return
+                    for idx, result in zip(
+                        indices, results
+                    ):
+                        license_number = result["license_number"]
+                        color = result["color"]
+                        if not result['plate']:
+                            continue
+                        plate_img = base64_to_cv2_image(result['plate'])
+                        if idx < len(buffer["license_plate"]):
+                            buffer["license_plate"][idx] = license_number
+                            buffer["plate_img"][idx] = plate_img
+                            buffer["v_color"][idx] = color
+                            buffer["logo"][idx] = ""
                     self.update_summary_trigger(obj_id)
 
             except Exception as e:
@@ -249,27 +226,9 @@ class LPRTracker(multiprocessing.Process):
                 self.vehicle_tracked[obj_id]["present_start"] = time.time()
                 start_1 = time.perf_counter()
                 logo = None
-                if self.grpc_client is not None:
-                    try:
-                        response = self.grpc_client.send_one(cropped_frame)
-                        if response is None:
-                            logger.warning("gRPC response is None")
-                            return
-                        license_plate = response.license_number
-                        v_color = response.color
-                        logo = response.logo
-                        if not response.plate:
-                            logger.warning(f"gRPC response plate is None {license_plate} {v_color} { logo}")
-                            return
-                        
-                        plate_img = base64_to_cv2_image(response.plate)
-                    except Exception as e:
-                        logger.error(f"An unexpected error occurred: {e}")
-                        return
-                else:
-                    license_plate, plate_img, v_color = await process_license_plate(
-                        cropped_frame, self.session
-                    )
+                license_plate, plate_img, v_color = await process_license_plate(
+                    cropped_frame, self.session
+                )
                 if not license_plate or len(license_plate) < 3:
                     return
                 else:

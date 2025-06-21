@@ -3,7 +3,7 @@ import aiohttp
 import base64
 import cv2
 from utils.logger import logger
-from config import LPR_HOST, LPR_PORT, LPR_GRPC_PORT
+from config import LPR_HOST, LPR_PORT
 from utils.common import base64_to_cv2_image, img_to_base64
 
 async def find_license_plate(img_base64, session):

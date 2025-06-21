@@ -13,10 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install uv
+
+COPY uv.lock pyproject.toml .python-version ./
+
 ENV UV_HTTP_TIMEOUT=1000
 ENV UV_LINK_MODE=copy
-
-COPY ./deployment/hls-stream/requirements.txt .
-
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv pip install -r requirements.txt --system 
+    uv sync --frozen

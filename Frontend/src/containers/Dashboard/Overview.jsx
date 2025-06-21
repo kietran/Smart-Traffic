@@ -365,7 +365,7 @@ function Overview() {
 
 
      useEffect(() => {
-        const ws = new WebSocket("ws://100.112.243.28:1239/events"); // ✅ Thay bằng URL WebSocket server của bạn
+        const ws = new WebSocket("ws://100.65.31.128:1239/events"); // ✅ Thay bằng URL WebSocket server của bạn
         wsRef.current = ws;
         ws.onopen = () => {
           console.log("🟢 Connected to WebSocket");

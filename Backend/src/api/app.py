@@ -14,7 +14,7 @@ from config import (
 from utils.logger import logger
 from modules.camera import HLSStreamManager
 
-from router import event, camera, reid_analysis, counting_analysis
+from router import event, camera, counting_analysis
 
 app = FastAPI(
     title="nano",
@@ -32,7 +32,6 @@ app.add_middleware(
 
 app.include_router(camera.router)
 app.include_router(event.router)
-app.include_router(reid_analysis.router)
 app.include_router(counting_analysis.router)
 
 # hls_manager = HLSStreamManager(HLS_SERVER)
