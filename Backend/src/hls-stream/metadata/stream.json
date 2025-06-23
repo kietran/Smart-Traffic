@@ -1,0 +1,27 @@
+{
+    "LH-HV-LL_CAM-01": {
+        "rtsp_url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57127_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+        "hls_postfix": "/stream/ai/LH-HV-LL_CAM-01/hls/live/index.m3u8"
+    },
+    "LH-HV-LL_CAM-02": {
+        "rtsp_url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57227_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+        "hls_postfix": "/stream/ai/LH-HV-LL_CAM-02/hls/live/index.m3u8"
+    },
+    "LH-HV-LL_CAM-03": {
+        "rtsp_url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57330_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+        "hls_postfix": "/stream/ai/LH-HV-LL_CAM-03/hls/live/index.m3u8"
+    },
+    "LH-HV-LL_CAM-04": {
+        "rtsp_url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57433_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+        "hls_postfix": "/stream/ai/LH-HV-LL_CAM-04/hls/live/index.m3u8"
+    },
+    "LH-HV-LL_CAM-05": {
+        "rtsp_url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57127_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+        "hls_postfix": "/stream/ai/LH-HV-LL_CAM-05/hls/live/index.m3u8"
+    },
+    "LH-HV-LL_CAM-06": {
+        "rtsp_url": "https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Live/Mp4/?camera=57227_923e7292-7415-424d-90db-f575a44828bf&quality=high&audio=0",
+        "hls_postfix": "/stream/ai/LH-HV-LL_CAM-06/hls/live/index.m3u8"
+    }
+}
+ 
