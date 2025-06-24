@@ -12,7 +12,7 @@ consumer_config = {
 
 
 def deserialize_data(packed_data):
-    unpacked_data = msgpack.unpackb(packed_data, raw=False)
+    unpacked_data = msgpack.unpackb(packed_data, raw=False, strict_map_key=False)
     frame_bytes = unpacked_data["frame"]
     metadata = unpacked_data["metadata"]
     return frame_bytes, metadata

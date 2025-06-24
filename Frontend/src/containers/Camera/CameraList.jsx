@@ -461,10 +461,21 @@ export default function CameraList() {
                       />
                     </StyledTableCell>
                     <StyledTableCell>
-                      <Link href={`cameras/edit/${row.camera_id}/info`}>
-                        {" "}
-                        <BorderColorIcon />
-                      </Link>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <Link href={`cameras/edit/${row.camera_id}/info`}>
+                          <BorderColorIcon />
+                        </Link>
+                        <IconButton
+                          aria-label="delete"
+                          color="error"
+                          onClick={() => {
+                            setSelected([row.id]);
+                            setShowConfirmDelete(true);
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Box>
                     </StyledTableCell>
                   </TableRow>
                 );

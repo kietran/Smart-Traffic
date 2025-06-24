@@ -21,6 +21,8 @@ import IconButton from "@mui/material/IconButton";
 import { SnackbarProvider, useSnackbar } from "notistack";
 import SearchOptionBar from "../../components/SearchOptionBar";
 import DataTable from "../../components/Table";
+import SaveIcon from '@mui/icons-material/Save';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const wrapperStyle = {
   display: "flex",
@@ -137,12 +139,12 @@ const CameraDrawer = ({ serviceName, cameraId, applyCallback, data }) => {
     const element = new window.Image();
     element.width = width;
     element.height = height;
+    element.onload = () => {
+      setSize({ width: element.width, height: element.height });
+      setImage(element);
+      imageRef.current = element;
+    };
     element.src = videoSource;
-    // trigger reload element
-
-    setSize({ width: element.width, height: element.height });
-    setImage(element);
-    imageRef.current = element;
   };
   const clearData = () => {
     setSize({});
@@ -257,14 +259,15 @@ const CameraDrawer = ({ serviceName, cameraId, applyCallback, data }) => {
 
   const addItem = () => {
     if (typeIndex === 0) {
-        let name = `line_${itemListName.length + 1}`;
+      let name = `line_${itemListName.length + 1}`;
       setLineManager({ ...lineManager, [name]: [] });
       setFocusItem(name);
     } else {
-        let name = `zone_${itemListName.length + 1}`;
+      let name = `zone_${itemListName.length + 1}`;
       setPolygonManager({ ...polygonManager, [name]: [] });
       setFocusItem(name);
     }
+    fetchAndShowLatestFrame();
   };
   const handleMouseMove = (e) => {
     const stage = e.target.getStage();
@@ -446,6 +449,18 @@ const CameraDrawer = ({ serviceName, cameraId, applyCallback, data }) => {
     };
   }
 
+  // Add a function to fetch and display the latest frame
+  const fetchAndShowLatestFrame = () => {
+    if (!cameraId) return;
+    apiGetFrame({ id: cameraId })
+      .then((response) => {
+        const url = `data:image/png;base64,${response}`;
+        setVideoSource(url);
+        update_image(url);
+      })
+      .catch((error) => enqueueSnackbar('Error loading latest frame', { variant: 'error' }));
+  };
+
   return (
     <div className="camera-drawer flex justify-start items-start bg-gray-100 p-5 gap-10">
       <div className="w-[300px] rounded-md text-black bg-gray-300 p-5">
@@ -538,20 +553,6 @@ const CameraDrawer = ({ serviceName, cameraId, applyCallback, data }) => {
               </Stage>
             </div>
             <div className="flex justify-start mt-5 gap-2">
-              {/* <Button
-                variant="outlined"
-                onClick={undo}
-                startIcon={<UndoIcon />}
-              >
-                Polygon
-              </Button>
-              <Button
-                variant="outlined"
-                onClick={undo}
-                startIcon={<UndoIcon />}
-              >
-                Line
-              </Button> */}
               <Button
                 variant="outlined"
                 onClick={undo}
@@ -564,12 +565,19 @@ const CameraDrawer = ({ serviceName, cameraId, applyCallback, data }) => {
                 onClick={reset}
                 startIcon={<BlockIcon />}
               >
-                Reset
+                Clear
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={fetchAndShowLatestFrame}
+                startIcon={<RefreshIcon />}
+              >
+                Reload
               </Button>
               <Button
                 variant="outlined"
                 onClick={() => completedDrawer()}
-                startIcon={<UndoIcon />}
+                startIcon={<SaveIcon />}
               >
                 Save
               </Button>

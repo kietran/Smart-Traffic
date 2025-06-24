@@ -42,16 +42,12 @@ const MenuProps = {
 };
 
 const names = [
-  "Crowd Detection",
   "Vehicle Counting",
-  "ReIdentify",
-  "Speed Estimate",
+  "License Plate",
 ];
 const map_ai_names = {
-  "Crowd Detection": "crowd_detection",
   "Vehicle Counting": "vehicle_counting",
-  ReIdentify: "reidentify",
-  "Speed Estimate": "speed_estimate",
+  "License Plate": "license_plate",
 };
 function getStyles(name, AISelected, theme) {
   return {

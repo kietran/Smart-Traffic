@@ -196,52 +196,6 @@ def event_trigger(
             logger.info(
                 f"Success trigger: {event_type} for camera {camera_name}, EID={event_id}"
             )
-        elif event_type == "speed_estimate":
-            full_thumb_path = None
-            speed_data = service_params["speed_data"]
-            for data in speed_data:
-                target_thumb_path = upload_image_to_minio(
-                    data.pop("frame"), event_type, camera_name, dir_name="full"
-                )
-                data["target_thumb_path"] = target_thumb_path
-            start_time = service_params["start_time"]
-            end_time = service_params["end_time"]
-            event_item = insert_db_event_item(
-                db,
-                event_type,
-                camera_name,
-                camera_id,
-                area_id,
-                area_name,
-                start_time,
-                end_time,
-                full_thumb_path,
-                full_thumb_path,
-                data={
-                    "speed_data": speed_data,
-                },
-            )
-        elif event_type == "traffic_light":
-            full_thumb_path = upload_image_to_minio(
-                annotated_frame, event_type, camera_name, dir_name="full"
-            )
-            target_frame = service_params["target_frame"]
-            target_thumb_path = upload_image_to_minio(
-                target_frame, event_type, camera_name, dir_name="target"
-            )
-            event_item = insert_db_event_item(
-                db,
-                event_type,
-                camera_name,
-                camera_id,
-                area_id,
-                area_name,
-                current_time,
-                current_time,
-                full_thumb_path,
-                target_thumb_path,
-                data={},
-            )
         elif event_type == "wrong_direction":
             full_thumb_path = upload_image_to_minio(
                 annotated_frame, event_type, camera_name, dir_name="full"

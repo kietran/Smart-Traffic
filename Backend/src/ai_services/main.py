@@ -19,9 +19,6 @@ from concurrent.futures import ProcessPoolExecutor, wait, FIRST_COMPLETED
 from modules.services import (
     handle_vehicle_counting,
     handle_license_plate,
-    handle_speed_estimate,
-    handle_traffic_light,
-    handle_wrong_lane,
 )
 
 from config import (
@@ -41,9 +38,6 @@ from collections import defaultdict
 SERVICE_MAP = {
     "vehicle_counting": handle_vehicle_counting,
     "license_plate": handle_license_plate,
-    "speed_estimate": handle_speed_estimate,
-    "traffic_light": handle_traffic_light,
-    "wrong_lane": handle_wrong_lane,
 }
 MAX_PENDING = 12
 def run_services(

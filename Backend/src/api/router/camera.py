@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, APIRouter
+from fastapi.responses import StreamingResponse
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from utils.logger import logger
@@ -8,6 +9,8 @@ from utils.functions import deserialize_data
 from confluent_kafka import Consumer, TopicPartition, OFFSET_END
 from bson.json_util import dumps
 import json
+import requests
+import asyncio
 
 
 router = APIRouter()
@@ -19,53 +22,46 @@ Camera = nano.camera
 
 @router.get("/{id}/latest.webp", tags=["camera"])
 async def latest_frame(id):
-    topic = "stream." + id
-    camera = Camera.find_one({"camera_id": id})
-    if camera is None:
-        raise HTTPException(status_code=404, detail="Camera not found")
+    """
+    Get the latest frame from the camera
 
-    if camera.get("review_image", None):
-        return camera.get("review_image")
-    consumer = Consumer(
-        {
-            "bootstrap.servers": KAFKA_SERVER,
-            "group.id": "api",
-            "auto.offset.reset": "earliest",
-            "enable.auto.commit": False,
-        }
-    )
-    consumer.subscribe([topic])
-    partition = TopicPartition(topic, 0, OFFSET_END)
-    consumer.assign([partition])
-    consumer.seek(partition)
-    msg = consumer.poll(timeout=1.0)
+    Args:
 
-    import base64
+        id (str): Camera ID
+
+    Returns:
+
+        StreamingResponse: The latest frame from the camera
+
+    """
+
+    def get_latest_frame():
+        topic = "stream." + id
+        consumer = Consumer(
+            {
+                "bootstrap.servers": KAFKA_SERVER,
+                "group.id": "api",
+                "auto.offset.reset": "latest",
+                "enable.auto.commit": False,
+            }
+        )
+        consumer.subscribe([topic])
+        partition = TopicPartition(topic, 0, OFFSET_END)
+        consumer.assign([partition])
+        consumer.seek(partition)
+        msg = consumer.poll(timeout=3.0)
+        consumer.close()
+        return msg
+
+    loop = asyncio.get_running_loop()
+    msg = await loop.run_in_executor(None, get_latest_frame)
 
     if msg is None:
         raise HTTPException(status_code=404, detail="No frame available")
+    image_bytes, _ = deserialize_data(msg.value())
+    response = StreamingResponse(BytesIO(image_bytes), media_type="image/webp")
+    return response
 
-    try:
-        image_bytes, _ = deserialize_data(msg.value())
-        base64_string = base64.b64encode(image_bytes).decode("utf-8")
-    except HTTPException as e:
-        if camera.get("review_image", None):
-            return camera.get("review_image")
-        
-    except Exception as e:
-        import rich
-        rich.console.Console().print_exception()
-        if camera.get("review_image", None):
-            return camera.get("review_image")
-        raise HTTPException(status_code=404, detail="Failed to process image")
-    # update camera field reviewd_image
-    Camera.update_one(
-        {"camera_id": id},
-        {"$set": {"review_image": base64_string}},
-    )
-
-    consumer.close()
-    return base64_string    
 
 
 @router.get("/cameras", tags=["camera"])
@@ -252,7 +248,11 @@ async def add_camera(
         print(camera_data)
         Camera.insert_one(camera_data)
 
-        # hls_manager.create_hls_stream(camera_data)
+        # Notify ai-streaming to start the camera
+        try:
+            requests.post("http://ai-streaming:8002/internal/add_camera", json={"camera_id": camera_id, "url": url}, timeout=2)
+        except Exception as e:
+            logger.error(f"Failed to notify ai-streaming: {e}")
 
         return {"statusCode": 200, "data": {}}
 
@@ -279,6 +279,12 @@ async def delete_camera(id: str):
         # service_http_manager.delete_http_for_all_service(id)
 
         Camera.delete_one({"camera_id": id})
+
+        # Notify ai-streaming to stop the camera
+        try:
+            requests.post("http://ai-streaming:8002/internal/remove_camera", json={"camera_id": id}, timeout=2)
+        except Exception as e:
+            logger.error(f"Failed to notify ai-streaming: {e}")
 
         logger.info(f"Camera {id} has been deleted.")
         return {"statusCode": 200, "message": "Camera deleted"}
