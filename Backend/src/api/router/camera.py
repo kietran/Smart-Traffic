@@ -10,7 +10,6 @@ from confluent_kafka import Consumer, TopicPartition, OFFSET_END
 from bson.json_util import dumps
 import json
 import requests
-import asyncio
 
 
 router = APIRouter()
@@ -22,45 +21,66 @@ Camera = nano.camera
 
 @router.get("/{id}/latest.webp", tags=["camera"])
 async def latest_frame(id):
-    """
-    Get the latest frame from the camera
+    topic = "stream." + id
+    camera = Camera.find_one({"camera_id": id})
+    if camera is None:
+        raise HTTPException(status_code=404, detail="Camera not found")
 
-    Args:
+    if camera.get("review_image", None):
+        return camera.get("review_image")
+    consumer = Consumer(
+        {
+            "bootstrap.servers": KAFKA_SERVER,
+            "group.id": "api",
+            "auto.offset.reset": "earliest",
+            "enable.auto.commit": False,
+        }
+    )
+    consumer.subscribe([topic])
+    # Get the end offset
+    partitions = consumer.assignment()
+    if not partitions:
+        partitions = [TopicPartition(topic, 0)]
+        consumer.assign(partitions)
+    end_offsets = consumer.get_watermark_offsets(partitions[0])
+    end_offset = end_offsets[1]
 
-        id (str): Camera ID
-
-    Returns:
-
-        StreamingResponse: The latest frame from the camera
-
-    """
-
-    def get_latest_frame():
-        topic = "stream." + id
-        consumer = Consumer(
-            {
-                "bootstrap.servers": KAFKA_SERVER,
-                "group.id": "api",
-                "auto.offset.reset": "latest",
-                "enable.auto.commit": False,
-            }
-        )
-        consumer.subscribe([topic])
-        partition = TopicPartition(topic, 0, OFFSET_END)
-        consumer.assign([partition])
-        consumer.seek(partition)
-        msg = consumer.poll(timeout=3.0)
+    if end_offset == 0:
         consumer.close()
-        return msg
+        raise HTTPException(status_code=404, detail="No frame available")
 
-    loop = asyncio.get_running_loop()
-    msg = await loop.run_in_executor(None, get_latest_frame)
+    # Seek to the last message
+    partition = TopicPartition(topic, 0, end_offset - 1)
+    consumer.assign([partition])
+    consumer.seek(partition)
+    msg = consumer.poll(timeout=1.0)
+
+    import base64
 
     if msg is None:
         raise HTTPException(status_code=404, detail="No frame available")
-    image_bytes, _ = deserialize_data(msg.value())
-    response = StreamingResponse(BytesIO(image_bytes), media_type="image/webp")
-    return response
+
+    try:
+        image_bytes, _ = deserialize_data(msg.value())
+        base64_string = base64.b64encode(image_bytes).decode("utf-8")
+    except HTTPException as e:
+        if camera.get("review_image", None):
+            return camera.get("review_image")
+        
+    except Exception as e:
+        import rich
+        rich.console.Console().print_exception()
+        if camera.get("review_image", None):
+            return camera.get("review_image")
+        raise HTTPException(status_code=404, detail="Failed to process image")
+    # update camera field reviewd_image
+    Camera.update_one(
+        {"camera_id": id},
+        {"$set": {"review_image": base64_string}},
+    )
+
+    consumer.close()
+    return base64_string    
 
 
 
@@ -152,7 +172,7 @@ async def update_camera(id: str, data: dict):
             for _service in data["services"]:
                 service_name = _service.get("service_name")
                 if service_name not in old_services:
-                    continue
+                    old_services[service_name] = {}
 
                 lines_data = []
                 polygons_data = []
@@ -243,7 +263,6 @@ async def add_camera(
             "url": url,
             "resolution": data.get("resolution", {"width": 1920, "height": 1080}),
             "data": {**data, "status": status},
-            "services": services,
         }
         print(camera_data)
         Camera.insert_one(camera_data)

@@ -213,7 +213,7 @@ export default function CameraList() {
             let id = item.camera_id;
             let camera_name = item.camera_name;
             let camera_id = item.camera_id;
-            let ai_engines = Object.entries(item.services)
+            let ai_engines = Object.entries(item.services || {})
               .filter(([key, value]) => value.enable)
               .map(([key, _]) => key);
             let status = item.status;

@@ -139,7 +139,7 @@ def main_loop():
                     continue
                 topic = topics[idx]
                 now = time.time()
-                
+                logger.info(f"[Inference] Frame processed for topic {topic} at {now}. Result: {result}")
                 should_push = False
                 if topic not in topic_initialized:
                     should_push = True
@@ -149,6 +149,7 @@ def main_loop():
                     should_push = True
                 
                 if should_push:
+                    logger.info(f"[Metadata] Sending metadata for topic {topic} at {now}")
                     send_metadata(
                         producer,
                         result,

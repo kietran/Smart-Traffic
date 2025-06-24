@@ -103,6 +103,11 @@ def run_services(
     wait(pending)
 
 def extract_camera_data(service_info, image_size=(640, 480)):
+    # Fallback: convert list to dict if needed
+    if isinstance(service_info, list):
+        service_info = {
+            s["service_name"]: s for s in service_info if "service_name" in s
+        }
     img_width, img_height = image_size[0], image_size[1]
     for service_name, data in service_info.items():
         if data["polygons"]:
@@ -161,6 +166,10 @@ def start(
     import copy
 
     service_info = camera_info.pop("services")
+    if isinstance(service_info, list):
+        service_info = {
+            s["service_name"]: s for s in service_info if "service_name" in s
+        }
     service_info_scaled = extract_camera_data(copy.deepcopy((service_info)), (640, 640))
     service_info_org = extract_camera_data(
         copy.deepcopy((service_info)),

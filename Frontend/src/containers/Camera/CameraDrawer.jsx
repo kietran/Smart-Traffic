@@ -187,24 +187,31 @@ const CameraDrawer = ({ serviceName, cameraId, applyCallback, data }) => {
 
     let init_lines = {}
     let init_polygons = {}
-    data[serviceName].lines.map((line, index) => {
+    if (data && data[serviceName]) {
+      (data[serviceName].lines || []).map((line, index) => {
+          let start = [line.start[0]*(width), line.start[1]*(height)]
+          let end = [line.end[0]*(width), line.end[1]*(height)]
+          init_lines[line.name] = [start, end];
+      })
+      (data[serviceName].polygons || []).map((polygon, index) => {
+          init_polygons[polygon.name] = polygon.zone.map((points) => [points[0]*(width), points[1]*(height)]);
+      })
 
-        let start = [line.start[0]*(width), line.start[1]*(height)]
-        let end = [line.end[0]*(width), line.end[1]*(height)]
-        init_lines[line.name] = [start, end];
-    })
-    data[serviceName].polygons.map((polygon, index) => {
-        init_polygons[polygon.name] = polygon.zone.map((points) => [points[0]*(width), points[1]*(height)]);
-    })
-
-    setLineManager(init_lines);
-    setPolygonManager(init_polygons);
-    setLineFinished(data[serviceName].lines.map((line, index) => line.name));
-    setPolygonFinished(data[serviceName].polygons.map((polygon, index) => polygon.name));
-    if (typeIndex === 0) {
-      setFocusItem(data[serviceName].lines[0]?.name);
+      setLineManager(init_lines);
+      setPolygonManager(init_polygons);
+      setLineFinished((data[serviceName].lines || []).map((line, index) => line.name));
+      setPolygonFinished((data[serviceName].polygons || []).map((polygon, index) => polygon.name));
+      if (typeIndex === 0) {
+        setFocusItem((data[serviceName].lines || [])[0]?.name);
+      } else {
+        setFocusItem((data[serviceName].polygons || [])[0]?.name);
+      }
     } else {
-        setFocusItem(data[serviceName].polygons[0]?.name);
+      setLineManager({});
+      setPolygonManager({});
+      setLineFinished([]);
+      setPolygonFinished([]);
+      setFocusItem(0);
     }
   }, [cameraId, serviceName]);
 
