@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, APIRouter
+from fastapi.responses import StreamingResponse
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from utils.logger import logger
@@ -8,6 +9,7 @@ from utils.functions import deserialize_data
 from confluent_kafka import Consumer, TopicPartition, OFFSET_END
 from bson.json_util import dumps
 import json
+import requests
 
 
 router = APIRouter()
@@ -35,7 +37,20 @@ async def latest_frame(id):
         }
     )
     consumer.subscribe([topic])
-    partition = TopicPartition(topic, 0, OFFSET_END)
+    # Get the end offset
+    partitions = consumer.assignment()
+    if not partitions:
+        partitions = [TopicPartition(topic, 0)]
+        consumer.assign(partitions)
+    end_offsets = consumer.get_watermark_offsets(partitions[0])
+    end_offset = end_offsets[1]
+
+    if end_offset == 0:
+        consumer.close()
+        raise HTTPException(status_code=404, detail="No frame available")
+
+    # Seek to the last message
+    partition = TopicPartition(topic, 0, end_offset - 1)
     consumer.assign([partition])
     consumer.seek(partition)
     msg = consumer.poll(timeout=1.0)
@@ -66,6 +81,7 @@ async def latest_frame(id):
 
     consumer.close()
     return base64_string    
+
 
 
 @router.get("/cameras", tags=["camera"])
@@ -156,7 +172,7 @@ async def update_camera(id: str, data: dict):
             for _service in data["services"]:
                 service_name = _service.get("service_name")
                 if service_name not in old_services:
-                    continue
+                    old_services[service_name] = {}
 
                 lines_data = []
                 polygons_data = []
@@ -247,12 +263,15 @@ async def add_camera(
             "url": url,
             "resolution": data.get("resolution", {"width": 1920, "height": 1080}),
             "data": {**data, "status": status},
-            "services": services,
         }
         print(camera_data)
         Camera.insert_one(camera_data)
 
-        # hls_manager.create_hls_stream(camera_data)
+        # Notify ai-streaming to start the camera
+        try:
+            requests.post("http://ai-streaming:8002/internal/add_camera", json={"camera_id": camera_id, "url": url}, timeout=2)
+        except Exception as e:
+            logger.error(f"Failed to notify ai-streaming: {e}")
 
         return {"statusCode": 200, "data": {}}
 
@@ -279,6 +298,12 @@ async def delete_camera(id: str):
         # service_http_manager.delete_http_for_all_service(id)
 
         Camera.delete_one({"camera_id": id})
+
+        # Notify ai-streaming to stop the camera
+        try:
+            requests.post("http://ai-streaming:8002/internal/remove_camera", json={"camera_id": id}, timeout=2)
+        except Exception as e:
+            logger.error(f"Failed to notify ai-streaming: {e}")
 
         logger.info(f"Camera {id} has been deleted.")
         return {"statusCode": 200, "message": "Camera deleted"}

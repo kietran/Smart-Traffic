@@ -213,7 +213,7 @@ export default function CameraList() {
             let id = item.camera_id;
             let camera_name = item.camera_name;
             let camera_id = item.camera_id;
-            let ai_engines = Object.entries(item.services)
+            let ai_engines = Object.entries(item.services || {})
               .filter(([key, value]) => value.enable)
               .map(([key, _]) => key);
             let status = item.status;
@@ -461,10 +461,21 @@ export default function CameraList() {
                       />
                     </StyledTableCell>
                     <StyledTableCell>
-                      <Link href={`cameras/edit/${row.camera_id}/info`}>
-                        {" "}
-                        <BorderColorIcon />
-                      </Link>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <Link href={`cameras/edit/${row.camera_id}/info`}>
+                          <BorderColorIcon />
+                        </Link>
+                        <IconButton
+                          aria-label="delete"
+                          color="error"
+                          onClick={() => {
+                            setSelected([row.id]);
+                            setShowConfirmDelete(true);
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Box>
                     </StyledTableCell>
                   </TableRow>
                 );
