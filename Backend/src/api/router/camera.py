@@ -174,6 +174,9 @@ async def update_camera(id: str, data: dict):
                 if service_name not in old_services:
                     old_services[service_name] = {}
 
+                enable = _service.get("enable", True)  # Default to True when configuring
+                old_services[service_name]["enable"] = enable
+
                 lines_data = []
                 polygons_data = []
                 for line_name, line in _service["data"]["cross_line"].items():
@@ -209,6 +212,14 @@ async def update_camera(id: str, data: dict):
                 }
             },
         )
+
+        # Notify ai-services when services are updated
+        if "services" in data:
+            try:
+                requests.post("http://tettet-ai-services:8003/internal/enable_services", json={"camera_id": id}, timeout=5)
+                logger.info(f"Notified ai-services about service changes for camera {id}")
+            except Exception as e:
+                logger.error(f"Failed to notify ai-services about service changes: {e}")
 
         # if old_url != new_url:
         #     hls_manager.update_hls_stream(camera)
@@ -273,6 +284,12 @@ async def add_camera(
         except Exception as e:
             logger.error(f"Failed to notify ai-streaming: {e}")
 
+        # Notify ai-services to start processing the camera
+        try:
+            requests.post("http://tettet-ai-services:8003/internal/add_camera", json={"camera_id": camera_id}, timeout=2)
+        except Exception as e:
+            logger.error(f"Failed to notify ai-services: {e}")
+
         return {"statusCode": 200, "data": {}}
 
     except HTTPException as e:
@@ -304,6 +321,12 @@ async def delete_camera(id: str):
             requests.post("http://ai-streaming:8002/internal/remove_camera", json={"camera_id": id}, timeout=2)
         except Exception as e:
             logger.error(f"Failed to notify ai-streaming: {e}")
+
+        # Notify ai-services to stop processing the camera
+        try:
+            requests.post("http://tettet-ai-services:8003/internal/remove_camera", json={"camera_id": id}, timeout=2)
+        except Exception as e:
+            logger.error(f"Failed to notify ai-services: {e}")
 
         logger.info(f"Camera {id} has been deleted.")
         return {"statusCode": 200, "message": "Camera deleted"}
