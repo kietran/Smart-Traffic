@@ -19,7 +19,7 @@ export const apiSetEventReviewed = async (data) => {
 
 
 export const apiSearchLpr = async (data) => {
-  let res = await API.post("/reid_analysis/search_lpr", data, {params: data});
+  let res = await API.post("/reid_analysis/search_lpr", data);
   return res.data;
 };
 export const apiGetVideo = async (params) => {

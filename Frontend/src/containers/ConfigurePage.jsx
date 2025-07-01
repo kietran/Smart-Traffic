@@ -15,12 +15,6 @@ import DataTable from "../components/Table";
 
 const service_info = [
   {
-    id: 1,
-    item_id: "reidentify",
-    item_name: "ReID",
-    group: null,
-  },
-  {
     id: 2,
     item_id: "license_plate",
     item_name: "license plate",
@@ -32,31 +26,6 @@ const service_info = [
     item_name: "vehicle counting",
     group: null,
   },
-  {
-    id: 4,
-    item_id: "speed_estimate",
-    item_name: "speed estimate",
-    group: null,
-  },
-  {
-    id: 5,
-    item_id: "crowd_detection",
-    item_name: "crowd detection",
-    group: null,
-  },
-  {
-    id: 6,
-    item_id: "traffic_light",
-    item_name: "traffic light",
-    group: null,
-  },
-  {
-    id: 7,
-    item_id: "accident_detection",
-    item_name: "accident detection",
-    group: null,
-  },
-
 ];
 
 const columns = [

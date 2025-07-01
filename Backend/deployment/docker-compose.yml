@@ -1,20 +1,20 @@
-name: nano
+name: tettet
 services:
   mongo:
     image: mongo
-    container_name: nano-mongo
+    container_name: tettet-mongo
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
-      MONGO_INITDB_DATABASE: nano
+      MONGO_INITDB_DATABASE: tettet
     ports:
       - 27010:27017
     volumes:
       - ./mongo/mongo-drop.js:/docker-entrypoint-initdb.d/mongo-drop.js:ro
       - ./mongo/mongo-up.js:/docker-entrypoint-initdb.d/mongo-up.js:ro
   mongo-express:
-    container_name: nano-mongo-express
+    container_name: tettet-mongo-express
     image: mongo-express
     restart: always
     ports:
@@ -27,7 +27,7 @@ services:
   redis:
     image: redis:latest
     restart: always
-    container_name: nano-redis
+    container_name: tettet-redis
     ports:
         - "${REDIS_PORT:-6379}:6379"
     volumes:
@@ -37,7 +37,7 @@ services:
         - REDIS_PORT=${REDIS_PORT:-6379}
         - REDIS_DATABASES=0
     networks:
-        - nano
+        - tettet
 
   ai-streaming:
     image: ai-streaming:v1.0.0
@@ -65,14 +65,14 @@ services:
       options:
         max-size: "50m"
     networks:
-      - nano
+      - tettet
   ai-services:
     command: uv run src/ai_services/main.py
     image: ai-services:v1.0.0
     build:
         context: ..
         dockerfile: deployment/ai_services/Dockerfile
-    container_name: nano-ai-services
+    container_name: tettet-ai-services
     working_dir: /app
     restart: unless-stopped
     volumes:
@@ -82,7 +82,7 @@ services:
         - "/etc/timezone:/etc/timezone:ro"
         - "/etc/localtime:/etc/localtime:ro"
     networks:
-        - nano
+        - tettet
     logging:
         driver: "json-file"
         options:
@@ -97,7 +97,7 @@ services:
                       capabilities: [gpu]
 
   api:
-    container_name: nano-api
+    container_name: tettet-api
     image: api:v1.0.0
     working_dir: /app
     build:
@@ -118,12 +118,12 @@ services:
         - "/etc/localtime:/etc/localtime:ro"
         - ../.env:/app/.env
     networks:
-        - nano
+        - tettet
     depends_on:
         - mongo
 
   minio:
-      container_name: nano-minio
+      container_name: tettet-minio
       ports:
           - "${MINIO_PORT:-9000}:9000"
           - "${MINIO_CONSOLE_PORT:-9001}:9001"
@@ -138,10 +138,10 @@ services:
       volumes:
           - ./minio/data:/data:rw,z
       networks:
-          - nano
+          - tettet
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
-    container_name: nano-kafka-console
+    container_name: tettet-kafka-console
     ports:
       - "6789:8080"
     environment:
@@ -150,18 +150,18 @@ services:
     depends_on:
       - kafka
     networks:
-      - nano
+      - tettet
   kafka:
     image: confluentinc/cp-kafka:7.6.1
     hostname: kafka
-    container_name: nano-kafka
+    container_name: tettet-kafka
     ports:
         - "9089:9092"
     environment:
         KAFKA_BROKER_ID: 1
         KAFKA_NODE_ID: 1
         KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
-        KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:29092,PLAINTEXT_HOST://100.112.243.28:9089"
+        KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:29092,PLAINTEXT_HOST://100.65.31.128:9089"
         KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
         KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
         KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
@@ -182,7 +182,7 @@ services:
         options:
             max-size: "50m"
     networks:
-        - nano
+        - tettet
   hls-stream:
     command: bash -c "cd /app/hls-stream && uv run api.py"
     image: hls-stream:v0.1.0
@@ -199,7 +199,7 @@ services:
       GPU_VIDEO_BITRATE: 500k
       GPU_MAXRATE: 1M
       GPU_BUFSIZE: 1M
-    container_name: nano-hls-stream
+    container_name: tettet-hls-stream
     working_dir: /app
     env_file:
       - ../.env
@@ -217,6 +217,6 @@ services:
         max-size: "50m"
     tty: true
 networks:
-  nano:
-    name: nano
+  tettet:
+    name: tettet
     driver: bridge

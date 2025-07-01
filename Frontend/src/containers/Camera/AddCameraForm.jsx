@@ -42,16 +42,12 @@ const MenuProps = {
 };
 
 const names = [
-  "Crowd Detection",
   "Vehicle Counting",
-  "ReIdentify",
-  "Speed Estimate",
+  "License Plate",
 ];
 const map_ai_names = {
-  "Crowd Detection": "crowd_detection",
   "Vehicle Counting": "vehicle_counting",
-  ReIdentify: "reidentify",
-  "Speed Estimate": "speed_estimate",
+  "License Plate": "license_plate",
 };
 function getStyles(name, AISelected, theme) {
   return {
@@ -62,11 +58,8 @@ function getStyles(name, AISelected, theme) {
 }
 
 const area_data = [
-  { id: "LH-LTT-HV", name: "THGT điểm giao đường Lý Thái Tổ - Hùng Vương" },
   { id: "LH-LTT-DK", name: "THGT điểm giao đường Lý Thái Tổ - Đồng Khởi" },
-  { id: "LH-HV-LL", name: "Nút giao Hùng Vương – Lê Lợi" },
-  { id: "LH-NVL-VNG", name: "Nút giao Nguyễn Văn Linh – Võ Nguyên Giáp" },
-  { id: "LH-NVL-HVL", name: "Ngã tư Nguyễn Văn Linh – Huỳnh Văn Lũy" },
+  { id: "LH-HV-LL", name: "Nút giao Hùng Vương – Lê Lợi" }
 ];
 
 const AddCameraForm = ({ mode }) => {

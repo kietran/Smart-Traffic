@@ -293,7 +293,8 @@ async def get_alert_overview(
         if end_time is None:
             end_time = datetime.now().timestamp()
         if start_time is None:
-            start_time = 0
+            # Default to last 5 minutes if not specified
+            start_time = datetime.now().timestamp() - (5 * 60)  # 5 minutes in seconds
 
         start_time_dt = datetime.fromtimestamp(start_time)
         end_time_dt = datetime.fromtimestamp(end_time)
@@ -303,7 +304,7 @@ async def get_alert_overview(
 
     try:
         camera_match = {}
-        if filter_data.get("camera_id"):
+        if filter_data and filter_data.get("camera_id"):
             camera_match["camera_id"] = filter_data["camera_id"]
 
         pipeline = [
@@ -356,6 +357,7 @@ async def get_alert_overview(
                                         "$dateToString": {
                                             "format": "%Y-%m-%d %H:%M:%S",
                                             "date": "$events.start_time",
+                                            "timezone": "Asia/Ho_Chi_Minh"
                                         }
                                     },
                                     "event_id": { "$toString": "$events._id" },
@@ -393,19 +395,6 @@ async def get_alert_overview(
                             ]
                         }
                     },
-                    # "accident": {
-                    #     "$sum": {
-                    #         "$cond": [
-                    #             {
-                    #             "$and": [
-                    #                 { "$eq": ["$events.event_type", "accident"] },
-                    #                 { "$eq": ["$events.is_reviewed", False] }
-                    #             ]},
-                    #             1,
-                    #             0,
-                    #         ]
-                    #     }
-                    # },
                     "wrong_lane": {
                         "$sum": {
                             "$cond": [

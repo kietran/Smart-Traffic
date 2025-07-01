@@ -20,12 +20,7 @@ const data = [
   { x: 150, y: 400, z: 500 },
   { x: 110, y: 280, z: 200 },
 ];
-const trafficData = [
-  { id: 1, type: "Red light" },
-  { id: 2, type: "OverSpeed" },
-  { id: 3, type: "Traffic jam" },
-  { id: 4, type: "Accident" },
-];
+
 const intervalOptions = [
   { value: (3600 * 0.5) / 6, label: "5 Minute" },
   { value: (3600 * 0.5) / 3, label: "10 Minute" },
@@ -47,11 +42,6 @@ const summarizeByArea = (data) => {
         area_name,
         camera_name,
         reviewed = 0,
-        traffic_light = 0,
-        accident = 0,
-        wrong_lane = 0,
-        wrong_direction = 0,
-        traffic_jam = 0,
         total = 0,
         history = [],
       } = item;
@@ -59,23 +49,13 @@ const summarizeByArea = (data) => {
         result[area_id] = {
           area_id,
           area_name,
-          traffic_light: 0,
-          accident: 0,
-          wrong_lane: 0,
-          wrong_direction: 0,
-          traffic_jam: 0,
             total: 0,
             reviewed: 0,
           history: [],
         };
       }
-      result[area_id].traffic_light += traffic_light;
-      result[area_id].accident += accident;
-      result[area_id].wrong_lane += wrong_lane;
-      result[area_id].wrong_direction += wrong_direction;
-      result[area_id].traffic_jam += traffic_jam;
       result[area_id].reviewed += reviewed;
-      result[area_id].total += (traffic_light + accident + wrong_lane + wrong_direction + traffic_jam);
+      result[area_id].total += total;
       const enrichedHistory = history.map((h) => ({
         ...h,
         cameraId,
@@ -101,6 +81,7 @@ function Overview() {
   const [cameraNames, setCameraNames] = useState([]);
   const [totalStats, setTotalStats] = useState({});
   const [trafficCameraSelect, setTrafficCameraSelect] = useState(null);
+  const [areaVehicleCounts, setAreaVehicleCounts] = useState({});
     const wsRef = useRef(null);
   
   const [trafficIntervalSelect, setTrafficIntervalSelect] = useState(
@@ -194,6 +175,7 @@ function Overview() {
     const [day, month, year] = date.split("-");
     const [hour, minute] = time.split(":");
 
+    // Return the original date string without any timezone adjustments
     return dateTimeStr;
   }
   useEffect(() => {
@@ -233,35 +215,149 @@ function Overview() {
         });
         fetchCamera();
 
+        // Create a map to store vehicle counts by area
+        let tempAreaVehicleCounts = {};
 
+        // Get vehicle counts from traffic data
+        apiGetSummaryTraffic({
+          camera_id: "all",
+          interval: 3600 * 24, // Daily data
+        })
+          .then((res) => {
+            // Process the data to get vehicle counts by camera/area
+            if (res.summary) {
+              Object.entries(res.summary).forEach(([date, items]) => {
+                items.forEach(item => {
+                  const cameraId = item.camera_id;
+                  if (cameraId) {
+                    const areaId = cameraId.split('_')[0]; // Extract area ID from camera ID
+                    if (!tempAreaVehicleCounts[areaId]) {
+                      tempAreaVehicleCounts[areaId] = 0;
+                    }
+                    tempAreaVehicleCounts[areaId]++;
+                  }
+                });
+              });
+            }
+            
+            // Store the vehicle counts in state
+            setAreaVehicleCounts(tempAreaVehicleCounts);
+
+            // Now fetch alert data
       apiGetAlertOverview({
         event_type: "all",
         filter_data: {},
-        start_time: 0,
+              start_time: Math.floor(Date.now() / 1000) - (5 * 60), // Last 5 minutes
       })
         .then((res) => {
             const summarizedData = summarizeByArea(res.items);
             let total_alert = summarizedData.reduce((acc, item) => {
                 return acc + item.total;
             }, 0);
-            console.log("summarizedData", summarizedData)
+                  
+                  // Count license plate events
+                  let licensePlateEvents = 0;
+                  let wrongDirectionEvents = 0;
+                  let totalVehicles = 0;
+                  
+                  // Add vehicle counts to each area
+                  summarizedData.forEach(area => {
+                    const areaId = area.area_id;
+                    area.vehicle_count = tempAreaVehicleCounts[areaId] || 0;
+                    
+                    area.history.forEach(event => {
+                      if (event.event_type === 'license_plate') {
+                        licensePlateEvents++;
+                      }
+                      if (event.event_type === 'wrong_direction') {
+                        wrongDirectionEvents++;
+                      }
+                    });
+                  });
+                  
+                  console.log("summarizedData", summarizedData);
+                  let total_reviewed = summarizedData.reduce((acc, item) => {
+                      return acc + item.reviewed;
+                  }, 0);
+
+                  setTotalStats((prev) => ({
+                      ...prev,
+                      total_alerts: licensePlateEvents,
+                      total_wrong_direction: wrongDirectionEvents,
+                      total_reviewed: total_reviewed,
+                      total_resolved: total_reviewed,
+                  }));
+                  setDataAlertTable(summarizedData);
+                  setDataAlertTableTmp(summarizedData);
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.error("Error fetching vehicle counts:", err);
+            
+            // If vehicle count fetch fails, still get alert data
+            apiGetAlertOverview({
+              event_type: "all",
+              filter_data: {},
+              start_time: Math.floor(Date.now() / 1000) - (5 * 60), // Last 5 minutes
+            })
+              .then((res) => {
+                  const summarizedData = summarizeByArea(res.items);
+                  
+                  // Count license plate events
+                  let licensePlateEvents = 0;
+                  let wrongDirectionEvents = 0;
+                  
+                  summarizedData.forEach(area => {
+                    area.history.forEach(event => {
+                      if (event.event_type === 'license_plate') {
+                        licensePlateEvents++;
+                      }
+                      if (event.event_type === 'wrong_direction') {
+                        wrongDirectionEvents++;
+                      }
+                    });
+                  });
+                  
             let total_reviewed = summarizedData.reduce((acc, item) => {
                 return acc + item.reviewed;
             }, 0);
 
             setTotalStats((prev) => ({
                 ...prev,
-                total_alerts: total_alert,
+                      total_alerts: licensePlateEvents,
+                      total_wrong_direction: wrongDirectionEvents,
                 total_reviewed: total_reviewed,
                 total_resolved: total_reviewed,
             }));
-            setDataAlertTable(summarizedData)
-            setDataAlertTableTmp(summarizedData)
+                  setDataAlertTable(summarizedData);
+                  setDataAlertTableTmp(summarizedData);
         })
         .catch((err) => {
           console.error(err);
+              });
         });
     }, []);
+    
+    // Calculate total vehicles from traffic data
+    useEffect(() => {
+      if (dataArea.traffic && Object.values(dataArea.traffic).length > 0) {
+        // Sum up all vehicle counts from the last data point
+        const lastDataPoint = Object.values(dataArea.traffic).pop();
+        if (lastDataPoint) {
+          const totalVehicles = field.reduce((sum, vehicleType) => {
+            return sum + (lastDataPoint[vehicleType] || 0);
+          }, 0);
+          
+          setTotalStats(prev => ({
+            ...prev,
+            total_vehicles: totalVehicles
+          }));
+        }
+      }
+    }, [dataArea.traffic]);
 
     // apiGetEventOverview({
     //   event_type: "speed_estimate",
@@ -298,69 +394,129 @@ function Overview() {
 
     
   const filterEventInterval = (value) => {
-    console.log("value", value);
-    // filter with timestamp in history each area in dataAlertTable where timestamp > now - value and value is in second
+    console.log("Selected interval value:", value);
+    
     if (!value) {
-        setDataAlertTable(dataAlertTableTmp);
-        return;
+      // If no value is selected, use the default 5 minutes
+      value = 5 * 60;
     }
-    const filteredData = dataAlertTableTmp.map((item) => {
-        let data = {
-            traffic_light: 0,
-            accident: 0,
-            wrong_lane: 0,
-            wrong_direction: 0,
-            traffic_jam: 0,
-            total: 0,
-        }
-
-        const filteredHistory = item.history.filter((historyItem) => {
-            
-            let historyTimestamp = historyItem.date;
-            // historyTimestamp format 2025-05-03 14:13:58
-            // convert historyTimestamp to timestamp
-            const event_type = historyItem.event_type;
-            const [date, time] = historyTimestamp.split(" ");
-            const [year, month, day] = date.split("-");
-            const [hour, minute, second] = time.split(":");
-            const historyDate = new Date(year, month - 1, day, hour, minute, second);
-            historyTimestamp = historyDate.getTime() / 1000;
-            const now = new Date().getTime() / 1000;
-   
-            if (historyTimestamp > now - value) {
-                data.total += 1;
-                if (event_type === "traffic_light") {
-                    data.traffic_light += 1;
-                }
-                if (event_type === "accident") {
-                    data.accident += 1;
-                }
-                if (event_type === "wrong_lane") {
-                    data.wrong_lane += 1;
-                }
-                if (event_type === "wrong_direction") {
-                    data.wrong_direction += 1;
-                }
-                if (event_type === "crowd_detection") {
-                    data.traffic_jam += 1;
-                }
-                
-
-            }
-            return historyTimestamp > now - value;
-
-        });
-        // update total, number in filteredHistory.history with event_type
+    
+    // Calculate the start time based on the selected interval
+    const startTime = Math.floor(Date.now() / 1000) - value;
+    
+    // Make a new API call with the updated time interval for alert events
+    apiGetAlertOverview({
+      event_type: "all",
+      filter_data: {},
+      start_time: startTime,
+    })
+      .then((res) => {
+        const summarizedData = summarizeByArea(res.items);
         
-        return {
-            ...item,
-            ...data,
+        // Count license plate events
+        let licensePlateEvents = 0;
+        let wrongDirectionEvents = 0;
+        
+        // Add vehicle counts to each area using the state variable
+        summarizedData.forEach(area => {
+          const areaId = area.area_id;
+          area.vehicle_count = areaVehicleCounts[areaId] || 0;
+          
+          // Count events by type
+          area.history.forEach(event => {
+            if (event.event_type === 'license_plate') {
+              licensePlateEvents++;
+            }
+            if (event.event_type === 'wrong_direction') {
+              wrongDirectionEvents++;
+            }
+          });
+        });
+        
+        console.log("Updated data for interval:", value, summarizedData);
+        console.log("License plate events:", licensePlateEvents);
+        console.log("Wrong direction events:", wrongDirectionEvents);
+        
+        // Now get license plate events separately since they're not in ALERT_TYPE
+        apiGetEventOverview({
+          event_type: "license_plate",
+          filter_data: {},
+          start_time: startTime,
+          end_time: Math.floor(Date.now() / 1000),
+        })
+          .then((lprRes) => {
+            console.log("License plate events response:", lprRes);
             
-            history: filteredHistory,
-        };
-    });
-    setDataAlertTable(filteredData);
+            // Process license plate events and add them to the summarized data
+            if (lprRes.items && lprRes.items.length > 0) {
+              lprRes.items.forEach(lprEvent => {
+                const areaId = lprEvent.area_id;
+                const areaIndex = summarizedData.findIndex(area => area.area_id === areaId);
+                
+                if (areaIndex >= 0) {
+                  // Format the event to match the structure in history
+                  const formattedEvent = {
+                    date: new Date(lprEvent.start_time.$date).toISOString().replace('T', ' ').substring(0, 19),
+                    event_id: lprEvent._id.$oid,
+                    is_reviewed: lprEvent.is_reviewed,
+                    timestamp: lprEvent.start_time,
+                    event_type: 'license_plate',
+                    thumbnail: lprEvent.full_thumbnail_path,
+                    license_plate: lprEvent.data?.license_plate,
+                    plate_img: lprEvent.data?.plate_img,
+                    target_img: lprEvent.target_thumbnail_path,
+                    camera_name: lprEvent.camera_name,
+                    cameraId: lprEvent.camera_id
+                  };
+                  
+                  // Add to history
+                  summarizedData[areaIndex].history.push(formattedEvent);
+                  licensePlateEvents++;
+                }
+              });
+              
+              console.log("Updated data with license plate events:", summarizedData);
+              console.log("Updated license plate count:", licensePlateEvents);
+            }
+            
+            let total_reviewed = summarizedData.reduce((acc, item) => {
+              return acc + item.reviewed;
+            }, 0);
 
+            setTotalStats((prev) => ({
+              ...prev,
+              total_alerts: licensePlateEvents,
+              total_wrong_direction: wrongDirectionEvents,
+              total_reviewed: total_reviewed,
+              total_resolved: total_reviewed,
+            }));
+            
+            setDataAlertTable(summarizedData);
+            setDataAlertTableTmp(summarizedData);
+          })
+          .catch((err) => {
+            console.error("Error fetching license plate events:", err);
+            
+            // Still update with what we have
+            let total_reviewed = summarizedData.reduce((acc, item) => {
+              return acc + item.reviewed;
+            }, 0);
+
+            setTotalStats((prev) => ({
+              ...prev,
+              total_alerts: licensePlateEvents,
+              total_wrong_direction: wrongDirectionEvents,
+              total_reviewed: total_reviewed,
+              total_resolved: total_reviewed,
+            }));
+            
+            setDataAlertTable(summarizedData);
+            setDataAlertTableTmp(summarizedData);
+          });
+      })
+      .catch((err) => {
+        console.error("Error fetching alert data for interval:", value, err);
+      });
   };
 
 
@@ -430,13 +586,13 @@ function Overview() {
     <>
       <Box sx={{ p: 4, ml: 6, mr: 6, mt: 2 }}>
         <Typography variant="h4" gutterBottom>
-          Traffic Status Dashboard
+          Vehicle Monitoring Dashboard
         </Typography>
         <StatHeadManager totalStats={totalStats}/>
         <Box className="bg-white p-6 mt-10 rounded-xl shadow-custom">
           <Box className="flex justify-between items-center">
             <Typography variant="h6" className="font-bold" align="left">
-              Alert information
+              AI Detection Events
             </Typography>
             <SingleSelectCustom data={intervalOptions} label="Interval" singleSelectChange={filterEventInterval} />
 
@@ -468,7 +624,7 @@ function Overview() {
           <Box className="p-2">
             <Box className="flex justify-between items-center">
               <Typography variant="h6" className="font-bold" align="left">
-                Traffic flow
+                Vehicle Count
               </Typography>
               <Box className="flex-1 flex justify-end items-center">
                 <SingleSelectCustom
@@ -487,7 +643,7 @@ function Overview() {
 
             <Box className="h-[300px] flex align-center justify-center mt-2">
               <AreaChartCustom
-                title="Traffic flow"
+                title="Vehicle Count"
                 data={dataArea.traffic && Object.values(dataArea.traffic)}
                 multiSelectValues={multiSelectValues}
                 area={area}

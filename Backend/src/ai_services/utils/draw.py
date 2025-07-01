@@ -53,12 +53,8 @@ class ServicesDrawer:
     def __init__(self, service_info):
 
         self.drawer = {
-            "crowd_detection": None,
             "vehicle_counting": None,
-            "reidentify": None,
             "license_plate": None,
-            "speed_estimate": None,
-            "traffic_light": None,
         }
         for service_name, metadata in service_info.items():
             if service_name in self.drawer:

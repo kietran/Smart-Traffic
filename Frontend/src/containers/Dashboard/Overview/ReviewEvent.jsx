@@ -4,7 +4,7 @@ import { Grid, Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import FrameList from "../../../components/Dashboard/VehicleSearch/FrameList";
 import axios from "axios";
-import {apiGetVideo, apiSetEventReviewed} from "../../../connectDB/axios";
+import {apiSetEventReviewed} from "../../../connectDB/axios";
 import { parseISO, subSeconds, addSeconds } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import {apiVehicleSearch} from "../../../connectDB/axios";
@@ -29,38 +29,22 @@ function extractTimeWithDateFns(isoString, segmentTimeSec) {
 
 function ReviewEvent({ open, data, handleClose }) {
     const [eventData, setData] = useState([]);
-    const videoRef = useRef(null);
     const [openDetail, setOpenDetail] = useState({ open: false, row: {} });
 
   useEffect(() => {
-    // let download_url = `https://vntt:Becamex%402024@192.168.105.3:29204/Acs/Streaming/Video/Export/Mp4?camera=57845_923e7292-7415-424d-90db-f575a44828bf&quality=high&start=${start_time_str}&end=${end_time_str}&audio=0`
-    if (data){
-        const timestamp = data.timestamp["$date"]
-        const segmentTime = 60*4; // ví dụ: 20 giây
-        const cam_id = data?.camera_name
-        apiGetVideo({cam_id, timestamp, segmentTime})
-        .then((res) => {
-            const url = res.video_url
-            console.log("## url", url)
-            videoRef.current.src = url;
-        })
-        .catch((error) => {
-          console.error("Error downloading video:", error);
-        });
-            
-    }   
-
-
+    // No need to fetch video anymore
   }, [data]);
+  
   const handleReviewed = () => {
     apiSetEventReviewed({ event_id: data.event_id })
         .then((res) => {
             handleClose();
         })
         .catch((error) => {
-            console.error("Error downloading video:", error);
+            console.error("Error setting event as reviewed:", error);
         });
   }
+  
   const getVehicleSearch = async () => {
     if (!data) return;
     let link_img = data?.target_img;
@@ -117,33 +101,45 @@ function ReviewEvent({ open, data, handleClose }) {
         }}
       >
         <Box sx={{padding: "20px", display: "flex", flexDirection: "column", gap: "20px"  }}>
-            <Box sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
-            {/* <Button onClick={getVehicleSearch}>
-                    Search
-                </Button> */}
-
+            <Box sx={{ display: "flex", flexDirection: "row", gap: "20px", justifyContent: "center" }}>
+                {/* Overview image */}
                 <div
-                    style={{ backgroundImage: `url(${data?.thumbnail})`, width: "50%", height: "500px", backgroundSize: "cover" }}
+                    style={{ 
+                      backgroundImage: `url(${data?.thumbnail})`, 
+                      width: "45%", 
+                      height: "500px", 
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                      cursor: "pointer"
+                    }}
                     onClick={() => {
                         setOpenDetail({ open: true, row: {"full_image": data?.thumbnail} });
-                    }
-                    }
-                ></div>
-                <video
-                ref={videoRef}
-                width="50%"
-                height="auto"
-                controls
-                style={{ borderRadius: "4px", objectFit: "cover", boxShadow: 1 }}
-                autoPlay
-                muted
-                ></video>
-
+                    }}
+                >
+                </div>
+                
+                {/* Target image */}
+                <div
+                    style={{ 
+                      backgroundImage: `url(${data?.target_img})`, 
+                      width: "45%", 
+                      height: "500px", 
+                      backgroundSize: "contain",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                      cursor: "pointer"
+                    }}
+                    onClick={() => {
+                        setOpenDetail({ open: true, row: {"full_image": data?.target_img} });
+                    }}
+                >
+                </div>
             </Box>
             <Box sx={{height: "100%", width:"100%" ,border: "1px solid #ccc", borderRadius: "4px", padding: "4px"}}>
-                {/* <Box sx={{height: "70%", width:"100%", border: "1px solid #ccc", borderRadius: "4px", margin: "2px" }}>
-                    <FrameList height="100%" previewList={eventData}/>
-                </Box> */}
                 <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", height: "30%", margin: "0px", alignItems:"end"  }}>   
                     <Grid container spacing={1} sx={{ padding: "2px" }}>
                         {/* Date */}
@@ -169,6 +165,18 @@ function ReviewEvent({ open, data, handleClose }) {
                         <Grid item xs={10}>
                             <Typography variant="body1"><b>{data?.camera_name}</b></Typography>
                         </Grid>
+                        
+                        {/* License Plate (only shown for license_plate events) */}
+                        {data?.event_type === 'license_plate' && data?.license_plate && (
+                          <>
+                            <Grid item xs={2}>
+                                <Typography variant="h6" fontWeight="bold">License Plate:</Typography>
+                            </Grid>
+                            <Grid item xs={10}>
+                                <Typography variant="body1"><b>{data?.license_plate}</b></Typography>
+                            </Grid>
+                          </>
+                        )}
                     </Grid>
                     <Button 
                     onClick={handleReviewed}

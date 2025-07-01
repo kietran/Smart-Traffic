@@ -26,16 +26,30 @@ def preprocessing(camera_streams, start_index):
     global preprocess_outputs, batch_ref_id
 
     def get_frame(thread):
-        ret_, (frame_tensor, key, frame, timestamp) = thread.get()
-        frame_tensor = frame_tensor.div_(255.0)
-        return ret_, key, frame, frame_tensor, timestamp
+        if not thread.is_alive():
+            logger.error(f"Camera process for {thread.rtsp_link} is not alive.")
+            return None
+            
+        try:
+            ret_, (frame_tensor, key, frame, timestamp) = thread.get()
+            if not ret_:
+                return None
+            frame_tensor = frame_tensor.div_(255.0)
+            return ret_, key, frame, frame_tensor, timestamp
+        except Exception as e:
+            logger.error(f"Error getting frame: {e}")
+            return None
 
     batch_id = 0
-    with ThreadPoolExecutor(max_workers=len(camera_streams)) as executor:
+    with ThreadPoolExecutor(max_workers=4) as executor:
         while True:
             futures = [executor.submit(get_frame, thread) for thread in camera_streams]
-            results = [future.result() for future in futures]
+            results = [future.result() for future in futures if future.result() is not None]
 
+            if not results:
+                time.sleep(0.1)
+                continue
+            
             ret_list, keys, frames_list, frames_tensor_list, timestamps = zip(*results)
             # batch_tensor = torch.cat(frames_tensor_list, dim=0)
             batch_tensor = torch.stack(frames_tensor_list)
@@ -189,11 +203,32 @@ if __name__ == "__main__":
     net = YOLO("src/ai-streaming/models/detect/CHECKPOINTCCCCCCC.pt")
 
     mongo_client = pymongo.MongoClient(MONGODB_SERVER)
-    metadata = mongo_client["nano"]["camera"]
-    metadata = list(metadata.find({}))
+    camera_collection = mongo_client["nano"]["camera"]
+
+    if camera_collection.count_documents({}) == 0:
+        logger.info("Camera collection is empty. Populating from config/camera.json...")
+        try:
+            with open("src/ai-streaming/config/camera.json", "r") as f:
+                camera_config_data = json.load(f)
+            if camera_config_data:
+                camera_collection.insert_many(camera_config_data)
+                logger.info(f"Successfully inserted {len(camera_config_data)} camera documents.")
+            else:
+                logger.warning("camera.json is empty. No data to populate.")
+        except FileNotFoundError:
+            logger.error("src/ai-streaming/config/camera.json not found. Cannot populate camera collection.")
+        except json.JSONDecodeError:
+            logger.error("Error decoding camera.json. Please check its format.")
+
+    metadata = list(camera_collection.find({}))
     logger.info(f"Connected to mongodb: {MONGODB_SERVER}!")
+    logger.info(f"Found {len(metadata)} camera(s) in the database.")
 
     camera_data = metadata[args.start_index : args.start_index + args.num_cam]
+    logger.info(f"Processing {len(camera_data)} camera(s) starting from index {args.start_index}.")
+
+    if not camera_data:
+        logger.warning("No camera data to process. Exiting.")
 
     CLASS_NAMES = net.names
     redis_client = RedisHandler(host=REDIS_HOST, port=REDIS_PORT, db=0, timeout=5)

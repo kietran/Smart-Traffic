@@ -18,10 +18,7 @@ from concurrent.futures import ProcessPoolExecutor, wait, FIRST_COMPLETED
 
 from modules.services import (
     handle_vehicle_counting,
-    handle_license_plate,
-    handle_speed_estimate,
-    handle_traffic_light,
-    handle_wrong_lane,
+    handle_license_plate
 )
 
 from config import (
@@ -40,10 +37,7 @@ from collections import defaultdict
 
 SERVICE_MAP = {
     "vehicle_counting": handle_vehicle_counting,
-    "license_plate": handle_license_plate,
-    "speed_estimate": handle_speed_estimate,
-    "traffic_light": handle_traffic_light,
-    "wrong_lane": handle_wrong_lane,
+    "license_plate": handle_license_plate
 }
 MAX_PENDING = 12
 def run_services(
@@ -78,10 +72,6 @@ def run_services(
             org_drawer = services_drawer["org_size"].drawer.get(service_name)
             if service_name == "license_plate":
                 tracker = lpr_tracker
-            elif service_name == "speed_estimate":
-                tracker = view_transformer
-                vga_drawer = services_drawer["vga_size"].drawer.get("license_plate")
-                org_drawer = services_drawer["org_size"].drawer.get("license_plate")
             if len(pending) >= MAX_PENDING:
                 done, _ = wait(pending, return_when=FIRST_COMPLETED)
                 pending -= done
