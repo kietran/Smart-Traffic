@@ -6,6 +6,7 @@ import redis
 import cv2
 import numpy as np
 from collections import defaultdict
+from utils.logger import logger
 
 count_start_time = time.time()
 crossed_in_all = defaultdict(lambda: defaultdict(dict))
@@ -31,23 +32,64 @@ def handle_vehicle_counting(
     db,
 ):
     global count_start_time, crossed_in_all, crossed_out_all, wrong_direction_buffer
+    
+    # Debug logging
+    logger.info(f"[VehicleCounting] Processing frame for topic: {kafka_topic}")
+    logger.info(f"[VehicleCounting] Detections count: {len(detections)}")
+    logger.info(f"[VehicleCounting] Tracker IDs: {detections.tracker_id}")
+    logger.info(f"[VehicleCounting] Class IDs: {detections.class_id}")
+    logger.info(f"[VehicleCounting] Confidences: {detections.confidence}")
+    logger.info(f"[VehicleCounting] Data keys: {list(detections.data.keys()) if detections.data else 'None'}")
+    
+    # Check if vga_drawer exists and has lines
+    if not vga_drawer:
+        logger.error(f"[VehicleCounting] No vga_drawer for topic: {kafka_topic}")
+        return
+        
+    if not hasattr(vga_drawer, 'line_annotator') or not vga_drawer.line_annotator:
+        logger.error(f"[VehicleCounting] No line_annotator in vga_drawer for topic: {kafka_topic}")
+        return
+        
+    if not hasattr(vga_drawer, 'line') or not vga_drawer.line:
+        logger.error(f"[VehicleCounting] No lines configured for topic: {kafka_topic}")
+        return
+        
+    logger.info(f"[VehicleCounting] Number of lines configured: {len(vga_drawer.line)}")
+    
     if vga_drawer:
         annotated_frame = vga_drawer.box_annotator.annotate(
             scene=frame, detections=detections
         )
     else:
         annotated_frame = frame
-    for line_annotator, line in zip(vga_drawer.line_annotator, vga_drawer.line):
-
-        crossed_in, crossed_out = line.trigger(detections)
-        # line_annotated_frame = line_annotator.annotate(annotated_frame, line)
+        
+    for idx, (line_annotator, line) in enumerate(zip(vga_drawer.line_annotator, vga_drawer.line)):
+        logger.info(f"[VehicleCounting] Processing line {idx}: {line.name}")
+        
+        try:
+            crossed_in, crossed_out = line.trigger(detections)
+            logger.info(f"[VehicleCounting] Line {line.name} triggered - crossed_in: {crossed_in}, crossed_out: {crossed_out}")
+        except Exception as e:
+            logger.error(f"[VehicleCounting] Error triggering line {line.name}: {e}")
+            continue
+            
         line_name = line.name
+        
+        # CRITICAL CHECK: This might be the issue
         if detections.tracker_id is None:
+            logger.warning(f"[VehicleCounting] No tracker IDs available - breaking from loop")
             break
+            
+        # Check if any vehicles crossed
+        crossed_in_count = sum(crossed_in) if crossed_in is not None else 0
+        crossed_out_count = sum(crossed_out) if crossed_out is not None else 0
+        logger.info(f"[VehicleCounting] Line {line_name} - In: {crossed_in_count}, Out: {crossed_out_count}")
+        
         for idx, (obj_id, is_crossed) in enumerate(
             zip(detections.tracker_id, crossed_in)
         ):
             if is_crossed:
+                logger.info(f"[VehicleCounting] Vehicle {obj_id} crossed IN on line {line_name}")
                 crossed_in_all[line_name][obj_id] = {
                     "obj_id": obj_id,
                     "timestamp": time.time(),
@@ -64,7 +106,7 @@ def handle_vehicle_counting(
             zip(detections.tracker_id, crossed_out)
         ):
             if is_crossed:
-                
+                logger.info(f"[VehicleCounting] Vehicle {obj_id} crossed OUT on line {line_name}")
                 crossed_out_all[line_name][obj_id] = {
                     "obj_id": obj_id,
                     "timestamp": timestamp,
@@ -88,8 +130,16 @@ def handle_vehicle_counting(
                     "buffer": []
                 }
                
+        # Check trigger condition
+        trigger_condition = (crossed_in_all or crossed_out_all) and not trigger_thread[0].is_alive()
+        logger.info(f"[VehicleCounting] Trigger condition check:")
+        logger.info(f"  - crossed_in_all: {dict(crossed_in_all)}")
+        logger.info(f"  - crossed_out_all: {dict(crossed_out_all)}")
+        logger.info(f"  - trigger_thread alive: {trigger_thread[0].is_alive()}")
+        logger.info(f"  - Will trigger: {trigger_condition}")
             
-        if (crossed_in_all or crossed_out_all) and not trigger_thread[0].is_alive():
+        if trigger_condition:
+            logger.info(f"[VehicleCounting] TRIGGERING EVENT for line {line_name}")
             trigger_thread[0] = threading.Thread(
                 target=event_trigger,
                 args=(
@@ -114,6 +164,7 @@ def handle_vehicle_counting(
             crossed_out_all.clear()
             count_start_time = time.time()
             trigger_thread[0].start()
+            logger.info(f"[VehicleCounting] Event trigger thread started for line {line_name}")
             
     tracker_violation(
         detections=detections,

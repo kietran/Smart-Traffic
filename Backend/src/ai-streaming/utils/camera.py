@@ -37,14 +37,19 @@ class Camera(multiprocessing.Process):
             "timestamp": None,
         }
         self.start()
+        logger.info(f"[Camera] Initializing camera for topic {topic} with URL: {rtsp_link}")
 
     def run(self):
+        logger.info(f"[Camera] Starting camera process for topic {self.topic}")
+        logger.info(f"[Camera] Attempting to connect to: {self.rtsp_link}")
         self.camera = cv2.VideoCapture(self.rtsp_link)
+        
         while True:
             if self.is_running == False:
                 break
             self.ret, frame = self.camera.read()
-            if self.ret:
+            logger.info(f"[Camera] Topic {self.topic} - Frame {frame_count}: ret={self.ret}, frame_shape={frame.shape if frame is not None else 'None'}")
+            if self.ret and frame is not None:
                 try:
       
                     if self.img_queue.full():
@@ -80,6 +85,7 @@ class Camera(multiprocessing.Process):
     def get(self):
         try:
             if self.img_queue.empty():
+                logger.info(f"[Camera] Topic {self.topic} - Queue is empty")
                 raise queue.Empty
             frame_id, frame, timestamp = self.img_queue.get(timeout=0.1)
             frame_tensor = (
@@ -92,7 +98,7 @@ class Camera(multiprocessing.Process):
             self.old_data["frame"] = frame
             self.old_data["frame_tensor"] = frame_tensor
             self.old_data["timestamp"] = timestamp
-            
+            logger.info(f"[Camera] Topic {self.topic} - Frame {frame_id} - Frame shape: {frame.shape}")
             return True, (frame_tensor, frame_id, frame, timestamp)
         except queue.Empty:
             if self.old_data["frame_id"] is not None:

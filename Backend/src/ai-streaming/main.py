@@ -83,11 +83,6 @@ def main_loop():
     stream = torch.cuda.Stream()
     import threading
 
-    # Track last push time for each topic
-    last_push_time = {}
-    push_interval = 120  # seconds (2 minutes)
-    topic_initialized = {}
-
     def preprocessing():
         global preprocess_outputs, batch_ref_id
         while True:
@@ -118,7 +113,7 @@ def main_loop():
     preprocess_thread.start()
     while True:
         try:
-            time.sleep(1 / 15)
+            time.sleep(1 / 10)
             if not camera_streams or preprocess_outputs[0] is None:
                 continue
             ret, keys, frames, timestamps, frames_tensor, batch_id = preprocess_outputs
@@ -139,27 +134,19 @@ def main_loop():
                     continue
                 topic = topics[idx]
                 now = time.time()
-                logger.info(f"[Inference] Frame processed for topic {topic} at {now}. Result: {result}")
-                should_push = False
-                if topic not in topic_initialized:
-                    should_push = True
-                    topic_initialized[topic] = True
-                    logger.info(f"First frame for topic {topic} - pushing immediately")
-                elif topic not in last_push_time or now - last_push_time[topic] >= push_interval:
-                    should_push = True
+                logger.info(f"[Inference] Frame processed for topic {topic} at {now}.")
                 
-                if should_push:
-                    logger.info(f"[Metadata] Sending metadata for topic {topic} at {now}")
-                    send_metadata(
-                        producer,
-                        result,
-                        keys[idx],
-                        topics[idx],
-                        frames[idx],
-                        timestamps[idx],
-                        trackers[idx],
-                    )
-                    last_push_time[topic] = now
+            
+                logger.info(f"[Metadata] Sending metadata for topic {topic} at {now}")
+                send_metadata(
+                    producer,
+                    result,
+                    keys[idx],
+                    topics[idx],
+                    frames[idx],
+                    timestamps[idx],
+                    trackers[idx],
+                )
         except KeyboardInterrupt:
             for camera in camera_streams:
                 camera.stop()
@@ -188,13 +175,23 @@ def send_metadata(
         result = result.to("cpu")
         detections = sv.Detections.from_ultralytics(result)
         detections = tracker.update_with_detections(detections)
+        
+        # Fix: Properly populate class_name from the model's class names
+        class_names = []
+        if detections.class_id is not None and len(detections.class_id) > 0:
+            for class_id in detections.class_id:
+                class_name = result.names.get(class_id, f"class_{class_id}")
+                class_names.append(class_name)
+        
+        logger.info(f"[Metadata] Topic {topic} - Detections: {len(detections)}, Tracker IDs: {detections.tracker_id}, Class names: {class_names}")
+        
         meta = {
             "timestamp": timestamp,
             "detections": detections.xyxy.tolist(),
             "confidences": detections.confidence.tolist(),
             "class_ids": detections.class_id.tolist(),
             "data": {
-                "class_name": detections.data.get("class_name", np.empty(0)).tolist()
+                "class_name": class_names
             },
             "track_ids": detections.tracker_id.tolist(),
         }
