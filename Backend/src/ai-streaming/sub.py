@@ -11,9 +11,9 @@ if __name__ == "__main__":
     with open(filepath, "r") as f:
         config = json.load(f)
     try:
-        total_cam = 100
-        num_cam_per_process = 6
-        device = 1
+        total_cam = 10
+        num_cam_per_process = 5
+        device = 0
         env = os.environ.copy()
         for i in range(0, min(total_cam, len(config)), num_cam_per_process):
             env["CUDA_VISIBLE_DEVICES"] = str(device)
@@ -33,7 +33,6 @@ if __name__ == "__main__":
                     env=env,
                 )
             )
-            device = (device + 1) % 2
         while True:
             time.sleep(1.0)
     except KeyboardInterrupt:

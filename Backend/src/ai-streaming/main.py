@@ -41,7 +41,7 @@ def preprocessing(camera_streams, start_index):
             return None
 
     batch_id = 0
-    with ThreadPoolExecutor(max_workers=4) as executor:
+    with ThreadPoolExecutor(max_workers=10) as executor:
         while True:
             futures = [executor.submit(get_frame, thread) for thread in camera_streams]
             results = [future.result() for future in futures if future.result() is not None]

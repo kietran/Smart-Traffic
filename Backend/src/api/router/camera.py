@@ -164,14 +164,17 @@ async def update_camera(id: str, data: dict):
                     if len(line) != 2:
                         continue
 
-                    lines_data.append(
-                        {
-                            "name": line_name,
-                            "start": line[0],
-                            "end": line[1],
-                            "trigger_wrong_direction": 1,
-                        }
-                    )
+                    line_data = {
+                        "name": line_name,
+                        "start": line[0],
+                        "end": line[1],
+                    }
+                    
+                    # Only add trigger_wrong_direction for cameras that should have it
+                    if id != "LH-LTT-DK_CAM-02" and id != "LH-LTT-DK_CAM-04":
+                        line_data["trigger_wrong_direction"] = 1
+                        
+                    lines_data.append(line_data)
                 old_services[service_name]["lines"] = lines_data
                 for zone_name, zone in _service["data"]["polygon_zone"].items():
                     polygons_data.append(
