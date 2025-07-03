@@ -61,3 +61,5 @@ deployment/minio/data/*
 deployment/milvus/volumes/*
 tmp
 src/reid/models/*
+.env
+.venv/
