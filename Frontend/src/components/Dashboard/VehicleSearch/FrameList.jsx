@@ -11,18 +11,8 @@ import { apiGetVideo } from "../../../connectDB/axios";
 
 
 const area_data = [
-    { id: "LH-LTT-HV", name: "THGT điểm giao đường Lý Thái Tổ - Hùng Vương" },
     { id: "LH-LTT-DK", name: "THGT điểm giao đường Lý Thái Tổ - Đồng Khởi" },
-    { id: "LH-HV-LL", name: "Nút giao Hùng Vương – Lê Lợi" },
-    { id: "LH-NVL-VNG", name: "Nút giao Nguyễn Văn Linh – Võ Nguyên Giáp" },
-    { id: "LH-NVL-HVL", name: "Ngã tư Nguyễn Văn Linh – Huỳnh Văn Lũy" },
-    {
-        id: "LH-VVK-HV",
-        name: "Nút giao Võ Văn Kiệt – Hùng Vương",
-    },
-    { id: "LH-NKKN-LD", name: "Ngã tư Nam Kỳ Khởi Nghĩa - Lê Duẩn" },
-    { id: "LH-VNG-LL", name: "Nút giao Võ Nguyên Giáp – Lê Lợi" },
-    { id: "LH-VX-HVL", name: "Vòng xoay – Huỳnh Văn Lũy" }
+    { id: "LH-HV-LL", name: "Nút giao Hùng Vương – Lê Lợi" }
   ];
 
 
@@ -41,8 +31,7 @@ export default function FrameList({ previewList=[], timeStrings=[], height= "90v
             const startTime = new Date(timeStrings[0]);
             const endTime = new Date(timeStrings[1]);
             new_previewList = previewList.filter((item) => {
-                const itemTime = new Date(item.snapshot_at);
-                console.log("itemTime", itemTime, startTime, endTime, itemTime <= endTime);
+                const itemTime = new Date(item.snapshot_at || (item.start_time?.$date || item.start_time));
                 return itemTime >= startTime && itemTime <= endTime;
             });
       
@@ -101,7 +90,7 @@ export default function FrameList({ previewList=[], timeStrings=[], height= "90v
             
           <div
             style={{
-              backgroundImage: `url(${item.thumbnail_path && item.thumbnail_path !== "unknown" ? item.thumbnail_path : "./no-available.png"})`,
+              backgroundImage: `url(${item.thumbnail_path || item.full_image || item.target_image || "./no-available.png"})`,
               width: "240px",
               height: "200px",
               backgroundSize: "cover",
@@ -114,9 +103,9 @@ export default function FrameList({ previewList=[], timeStrings=[], height= "90v
               setOpenDetail({
                 open: true,
                 row: {
-                  full_image: item.thumbnail_path,
+                  full_image: item.thumbnail_path || item.full_image,
                   camera_id: item?.camera_id,
-                  snapshot_at: item?.snapshot_at,
+                  snapshot_at: item?.snapshot_at || (item.start_time?.$date || item.start_time),
                 },
               });
             }}

@@ -140,9 +140,18 @@ function EventList({ rows, setReviewImage, setOpenDetail, oldrows=[], cameraId=n
       let start_time = event.start_time;
       if (typeof start_time === "number") {
           start_time = start_time * 1000;
+      } else if (typeof start_time === "object" && start_time["$date"]) {
+          start_time = start_time["$date"];
       }
-      const start_date = new Date(start_time).toLocaleString("en-US", {
-          timeZone: "Asia/Ho_Chi_Minh",
+      
+      // Create a date in the local timezone
+      const localDate = new Date(start_time);
+      
+      // Adjust for UTC+7
+      const utcPlus7Date = new Date(localDate.getTime() - (12 * 60 * 60 * 1000));
+      
+      // Format the date in a consistent way
+      const start_date = utcPlus7Date.toLocaleString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit",
@@ -150,7 +159,6 @@ function EventList({ rows, setReviewImage, setOpenDetail, oldrows=[], cameraId=n
           month: "2-digit",
           day: "2-digit",
       });
-      
       
       return {
         full_image: event.full_thumbnail_path,
@@ -238,7 +246,7 @@ function EventList({ rows, setReviewImage, setOpenDetail, oldrows=[], cameraId=n
                   <StyledTableCell align="center">
                     License Plate
                   </StyledTableCell>
-                  <StyledTableCell align="center">Occur Time</StyledTableCell>
+                  <StyledTableCell align="center">Time</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

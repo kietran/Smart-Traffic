@@ -14,26 +14,72 @@ const field = ["car", "motorbike", "bus", "truck", "bicycle"];
 const stroke = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#ff0000"];
 const fill = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#ff0000"];
 
-const renderCustomAxisTick = ({ x, y, payload }) => {
-  const [date, time] = payload.value.split(" ");
+// Helper function to adjust time to UTC+7
+const adjustToUTCPlus7 = (dateTimeStr) => {
+  const [date, time] = dateTimeStr.split(" ");
   const [day, month, year] = date.split("-");
   const [hour, minute] = time.split(":");
 
-  const line1 = `${hour}:${minute}`; // dòng 1: giờ
-  const line2 = `${day}-${month}-${year}`; // dòng 2: ngày-tháng
+  // Create a date in the local timezone
+  const localDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:00`);
+  
+  // Adjust for UTC+7
+  const utcPlus7Date = new Date(localDate.getTime() + (7 * 60 * 60 * 1000));
+  
+  // Format the adjusted time
+  const adjustedHour = utcPlus7Date.getHours().toString().padStart(2, '0');
+  const adjustedMinute = utcPlus7Date.getMinutes().toString().padStart(2, '0');
+  
+  return {
+    time: `${adjustedHour}:${adjustedMinute}`,
+    date: `${day}-${month}-${year}`
+  };
+};
+
+const renderCustomAxisTick = ({ x, y, payload }) => {
+  const { time, date } = adjustToUTCPlus7(payload.value);
 
   return (
     <g transform={`translate(${x},${y})`}>
       <text x={0} y={0} dy={10} textAnchor="middle" fill="#666" fontSize={12}>
         <tspan x={0} dy="1.2em">
-          {line1}
+          {time}
         </tspan>
         <tspan x={0} dy="1.2em">
-          {line2}
+          {date}
         </tspan>
       </text>
     </g>
   );
+};
+
+// Custom tooltip formatter to display time in UTC+7
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    const { time, date } = adjustToUTCPlus7(label);
+    
+    return (
+      <div className="custom-tooltip" style={{ 
+        backgroundColor: 'white', 
+        padding: '10px', 
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      }}>
+        <p className="label" style={{ margin: '0 0 5px 0', fontWeight: 'bold' }}>{`${date} ${time}`}</p>
+        {payload.map((entry, index) => (
+          <p key={`item-${index}`} style={{ 
+            margin: '2px 0',
+            color: entry.color
+          }}>
+            {`${entry.name}: ${entry.value}`}
+          </p>
+        ))}
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export function AreaChartCustom({ data, title, multiSelectValues, area }) {
@@ -106,7 +152,7 @@ export function AreaChartCustom({ data, title, multiSelectValues, area }) {
           }}
         />
         <YAxis />
-        <Tooltip />
+        <Tooltip content={<CustomTooltip />} />
         <Legend
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}

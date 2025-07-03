@@ -80,96 +80,48 @@ def remove_camera(camera_id):
 # Main processing loop (runs even if no cameras yet)
 def main_loop():
     global preprocess_outputs, batch_ref_id
-    stream = torch.cuda.Stream()
-    import threading
 
-    # Track last push time for each topic
-    last_push_time = {}
-    push_interval = 120  # seconds (2 minutes)
-    topic_initialized = {}
-
-    def preprocessing():
-        global preprocess_outputs, batch_ref_id
-        while True:
-            if not camera_streams:
-                time.sleep(0.5)
-                continue
-            def get_frame(thread):
-                ret_, (frame_tensor, key, frame, timestamp) = thread.get()
-                frame_tensor = frame_tensor.div_(255.0)
-                return ret_, key, frame, frame_tensor, timestamp
-            with ThreadPoolExecutor(max_workers=len(camera_streams) if len(camera_streams) else 4) as executor:
-                futures = [executor.submit(get_frame, thread) for thread in camera_streams]
-                results = [future.result() for future in futures]
-                ret_list, keys, frames_list, frames_tensor_list, timestamps = zip(*results)
-                batch_tensor = torch.stack(frames_tensor_list)
-                batch_id = batch_ref_id + 1
-                preprocess_outputs = (
-                    list(ret_list),
-                    list(keys),
-                    list(frames_list),
-                    list(timestamps),
-                    batch_tensor,
-                    batch_id,
-                )
-                batch_ref_id = batch_id
-
-    preprocess_thread = threading.Thread(target=preprocessing, daemon=True)
-    preprocess_thread.start()
-    while True:
+    def get_frame(thread):
+        if not thread.is_alive():
+            logger.error(f"Camera process for {thread.rtsp_link} is not alive.")
+            return None
+            
         try:
-            time.sleep(1 / 15)
-            if not camera_streams or preprocess_outputs[0] is None:
-                continue
-            ret, keys, frames, timestamps, frames_tensor, batch_id = preprocess_outputs
-            if batch_ref_id != batch_id:
-                continue
-            with torch.cuda.stream(stream):
-                results = net(
-                    frames_tensor,
-                    stream=False,
-                    verbose=False,
-                    conf=0.4,
-                    iou=0.7,
-                    agnostic_nms=True,
-                    classes=[1, 2, 3, 4, 5],
-                )
-            for idx, result in enumerate(results):
-                if not ret[idx]:
-                    continue
-                topic = topics[idx]
-                now = time.time()
-                logger.info(f"[Inference] Frame processed for topic {topic} at {now}. Result: {result}")
-                should_push = False
-                if topic not in topic_initialized:
-                    should_push = True
-                    topic_initialized[topic] = True
-                    logger.info(f"First frame for topic {topic} - pushing immediately")
-                elif topic not in last_push_time or now - last_push_time[topic] >= push_interval:
-                    should_push = True
-                
-                if should_push:
-                    logger.info(f"[Metadata] Sending metadata for topic {topic} at {now}")
-                    send_metadata(
-                        producer,
-                        result,
-                        keys[idx],
-                        topics[idx],
-                        frames[idx],
-                        timestamps[idx],
-                        trackers[idx],
-                    )
-                    last_push_time[topic] = now
-        except KeyboardInterrupt:
-            for camera in camera_streams:
-                camera.stop()
-                camera.join()
-                logger.info(f"Camera {camera} stopped.")
-            break
+            ret_, (frame_tensor, key, frame, timestamp) = thread.get()
+            if not ret_:
+                return None
+            frame_tensor = frame_tensor.div_(255.0)
+            return ret_, key, frame, frame_tensor, timestamp
         except Exception as e:
-            console.print_exception()
-            logger.error(f"Error: {e}")
-            continue
+            logger.error(f"Error getting frame: {e}")
+            return None
+
+    batch_id = 0
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        while True:
+            futures = [executor.submit(get_frame, thread) for thread in camera_streams]
+            results = [future.result() for future in futures if future.result() is not None]
+
+            if not results:
+                time.sleep(0.1)
+                continue
+            
+            ret_list, keys, frames_list, frames_tensor_list, timestamps = zip(*results)
+            # batch_tensor = torch.cat(frames_tensor_list, dim=0)
+            batch_tensor = torch.stack(frames_tensor_list)
+            while batch_ref_id != batch_id:
+                time.sleep(1 / 100)
+            batch_id += 1
+            if batch_id == 1000:
+                batch_id = 0
+            preprocess_outputs = (
+                list(ret_list),
+                list(keys),
+                list(frames_list),
+                list(timestamps),
+                batch_tensor,
+                batch_id,
+            )
 
 
 import uuid
@@ -222,9 +174,60 @@ def run_api():
     uvicorn.run(app, host="0.0.0.0", port=8002, log_level="info")
 
 if __name__ == "__main__":
-    # Start FastAPI in a background thread
-    api_thread = threading.Thread(target=run_api, daemon=True)
-    api_thread.start()
-    logger.info("AI streaming service started. No cameras running by default.")
-    main_loop()
+    # add argument parser
+
+    parser = argparse.ArgumentParser(description="Process camera.")
+    parser.add_argument("--start_index", type=int, required=False, help="Start index")
+    parser.add_argument("--num_cam", type=int, required=False, help="Number of camera")
+    parser.add_argument("--meta_file", type=str, required=False, help="Meta file")
+
+    args = parser.parse_args()
+
+    preprocess_outputs = (None, None, None, None, None, None)
+    batch_ref_id = 0
+    # Load model
+    net = YOLO("src/ai-streaming/models/detect/CHECKPOINTCCCCCCC.pt")
+
+    mongo_client = pymongo.MongoClient(MONGODB_SERVER)
+    camera_collection = mongo_client["nano"]["camera"]
+
+    if camera_collection.count_documents({}) == 0:
+        logger.info("Camera collection is empty. Populating from config/camera.json...")
+        try:
+            with open("src/ai-streaming/config/camera.json", "r") as f:
+                camera_config_data = json.load(f)
+            if camera_config_data:
+                camera_collection.insert_many(camera_config_data)
+                logger.info(f"Successfully inserted {len(camera_config_data)} camera documents.")
+            else:
+                logger.warning("camera.json is empty. No data to populate.")
+        except FileNotFoundError:
+            logger.error("src/ai-streaming/config/camera.json not found. Cannot populate camera collection.")
+        except json.JSONDecodeError:
+            logger.error("Error decoding camera.json. Please check its format.")
+
+    metadata = list(camera_collection.find({}))
+    logger.info(f"Connected to mongodb: {MONGODB_SERVER}!")
+    logger.info(f"Found {len(metadata)} camera(s) in the database.")
+
+    camera_data = metadata[args.start_index : args.start_index + args.num_cam]
+    logger.info(f"Processing {len(camera_data)} camera(s) starting from index {args.start_index}.")
+
+    if not camera_data:
+        logger.warning("No camera data to process. Exiting.")
+
+    CLASS_NAMES = net.names
+    redis_client = RedisHandler(host=REDIS_HOST, port=REDIS_PORT, db=0, timeout=5)
+    topics = [camera_data[i]["camera_id"] for i in range(len(camera_data))]
+    camera_streams = [
+        Camera(camera_data[i]["url"], redis_client, topic=topics[i], cam=0)
+        for i in range(len(camera_data))
+    ]
+    main(
+        net,
+        args.start_index,
+        camera_streams,
+        topics,
+    )
+
     cv2.destroyAllWindows()

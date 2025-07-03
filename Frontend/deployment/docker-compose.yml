@@ -1,7 +1,7 @@
-name: nano-frontend
+name: tettet-frontend
 services:
   frontend:
-    container_name: nano-frontend
+    container_name: tettet-frontend
     image: frontend:v1.0.0
     build:
       context: ..
@@ -11,7 +11,7 @@ services:
     ports:
       - "8002:5173"
     networks:
-      - nano
+      - tettet
     tty: true
     restart: unless-stopped
     logging:
@@ -20,6 +20,6 @@ services:
         max-size: "50m"
     command: npm run dev
 networks:
-  nano:
-    name: nano
+  tettet:
+    name: tettet
     driver: bridge

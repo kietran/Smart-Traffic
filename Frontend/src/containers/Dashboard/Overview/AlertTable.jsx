@@ -15,14 +15,9 @@ import Badge from '@mui/material/Badge';
 import {SingleSelectCustom} from '../../../components/SelectCustom';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import OpacityIcon from '@mui/icons-material/Opacity';
-import BakeryDiningIcon from '@mui/icons-material/BakeryDining';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import TrafficIcon from '@mui/icons-material/Traffic';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import SignpostIcon from '@mui/icons-material/Signpost';
-import BusAlertIcon from '@mui/icons-material/BusAlert';
-import NewReleasesIcon from '@mui/icons-material/NewReleases';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WarningIcon from '@mui/icons-material/Warning';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
@@ -45,24 +40,41 @@ function Row(props) {
       label: name,
       value: name,
     }));
-    const uniqueTypes = Array.from(
-        new Set(row.history.map((item) => item.event_type))
-        ).map((name) => ({
+    
+    // Filter out null or undefined event_types and add 'license_plate' if not present
+    const eventTypes = row.history.map(item => item.event_type).filter(Boolean);
+    if (!eventTypes.includes('license_plate')) {
+      eventTypes.push('license_plate');
+    }
+    
+    const uniqueTypes = Array.from(new Set(eventTypes)).map((name) => ({
             label: name,
             value: name,
         }));
+    
     setTypeOptions(uniqueTypes);
     setCameraOptions(uniqueCameras);
   }, [row.history]);
+  
   const openReview = (historyRow) => {
     // Open the review page with the selected history row
     console.log("historyRow", historyRow);
     setReviewEvent(historyRow);
-
   }
+  
   const handleClose = () => {
     setReviewEvent(null);
   };
+
+  // Count events by type
+  const licensePlateCount = row.history.filter(item => item.event_type === 'license_plate').length;
+  const wrongDirectionCount = row.history.filter(item => item.event_type === 'wrong_direction').length;
+  
+  // Calculate vehicle count for this intersection
+  const vehicleCount = row.vehicle_count || 0;
+
+  console.log(`Area ${row.area_name}: license_plate=${licensePlateCount}, wrong_direction=${wrongDirectionCount}, vehicle_count=${vehicleCount}`);
+  console.log("History events:", row.history.map(item => item.event_type));
 
   return (
     <React.Fragment>
@@ -78,54 +90,26 @@ function Row(props) {
         </TableCell>
         
         <TableCell align="center">
-                        {
-            row.traffic_light ? (
-            <Badge badgeContent={row.traffic_light} color="warning">
-                <WarningIcon sx={{ color: 'orange' }} />
+          {licensePlateCount ? (
+            <Badge badgeContent={licensePlateCount} color="primary">
+              <VpnKeyIcon sx={{ color: '#1976d2' }} />
             </Badge>
-            ) 
-            : 
+          ) : 
             <CheckCircleIcon sx={{ color: 'green' }} />
-            }
+          }
         </TableCell>
         <TableCell align="center">
-                        {
-            row.traffic_jam ? (
-            <Badge badgeContent={row.traffic_jam} color="warning">
-                <WarningIcon sx={{ color: 'orange' }} />
+          {wrongDirectionCount ? (
+            <Badge badgeContent={wrongDirectionCount} color="warning">
+              <WarningIcon sx={{ color: 'orange' }} />
             </Badge>
-            ) 
-            : 
+          ) : 
             <CheckCircleIcon sx={{ color: 'green' }} />
-            }
-        </TableCell>
-        <TableCell align="center">
-            {
-            row.wrong_lane ? (
-            <Badge badgeContent={row.wrong_lane} color="warning">
-                <WarningIcon sx={{ color: 'orange' }} />
-            </Badge>
-            ) 
-            : 
-            <CheckCircleIcon sx={{ color: 'green' }} />
-            }
-        </TableCell>
-        <TableCell align="center">
-        {
-            row.wrong_direction ? (
-            <Badge badgeContent={row.wrong_direction} color="warning">
-                <WarningIcon sx={{ color: 'orange' }} />
-            </Badge>
-            ) 
-            : 
-            <CheckCircleIcon sx={{ color: 'green' }} />
-            }
+          }
         </TableCell>
       </TableRow>
-      <TableRow 
-      
-      >
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 , backgroundColor: '#f5f5f5' }} colSpan={6}>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 , backgroundColor: '#f5f5f5' }} colSpan={4}>
           <Collapse in={open} timeout="auto" unmountOnExit sx={{  maxHeight: '600px', overflowY: 'auto' }}>
             <Box sx={{ margin: 1 }}>
             <div className="flex justify-between items-center sticky top-0 bg-[#f5f5f5] z-10 border-b-3 border-[#e0e0e0] border-t-0 border-l-0 border-r-0 border-solid">
@@ -134,8 +118,6 @@ function Row(props) {
                 History
               </Typography>
                 <div>
-
-
                 <SingleSelectCustom
                     data={typeOptions}
                     label="Type"
@@ -215,50 +197,33 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-
-
 export default function AlertTable({dataTable}) {
-    console.log("dataTable", dataTable);
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
-      
             <TableCell><h3>Traffic Intersection ID</h3></TableCell>
-            <TableCell align="right"><div className='flex gap-2'><h3>Red light</h3><TrafficIcon  sx={{ color: 'black' }} /></div></TableCell>
-            <TableCell align="right"><div className='flex gap-2'><h3>Traffic Congestion</h3><NewReleasesIcon  sx={{ color: 'red' }} /></div></TableCell>
-            <TableCell align="right"><div className='flex gap-2'><h3>Wrong Lane</h3><BusAlertIcon  sx={{ color: 'orange' }} /></div></TableCell>
-            <TableCell align="right"><div className='flex gap-2'><h3>Wrong Direction</h3><SignpostIcon  sx={{ color: 'green' }} /></div></TableCell>
-   
+            <TableCell align="center">
+              <div className='flex flex-col items-center justify-center'>
+                <VpnKeyIcon sx={{ color: '#1976d2' }} />
+                <h3>License Plate</h3>
+              </div>
+            </TableCell>
+            <TableCell align="center">
+              <div className='flex flex-col items-center justify-center'>
+                <SignpostIcon sx={{ color: 'orange' }} />
+                <h3>Wrong Direction</h3>
+              </div>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {dataTable.map((row, index) => {
-
             return (
               <React.Fragment key={index}>
-                <Row row={row} 
-                />
+                <Row row={row} />
               </React.Fragment>
             );
           })}

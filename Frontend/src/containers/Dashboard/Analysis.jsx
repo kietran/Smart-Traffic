@@ -54,15 +54,8 @@ function Analysis() {
 
   const areaTabs = [
     "All",
-    "LH-VNG-LL",
-    "LH-NKKN-LD",
     "LH-HV-LL",
-    "LH-LTT-HV",
     "LH-LTT-DK",
-    "LH-NVL-VNG",
-    "LH-VVK-HV",
-    "LH-NVL-HVL",
-    "LH-VX-HVL"
     
   ];
 
@@ -79,23 +72,32 @@ function Analysis() {
 
   const format_event = (event) => {
     event.full_thumbnail_path = event.full_thumbnail_path?.replace(
-        "100.65.31.128"
+        "100.65.31.128",
+        import.meta.env.VITE_APP_API_HOST || "100.65.31.128"
       );
       event.target_thumbnail_path = event.target_thumbnail_path?.replace(
-        "100.65.31.128"
+        "100.65.31.128",
+        import.meta.env.VITE_APP_API_HOST || "100.65.31.128"
       );
       event.data.plate_thumb_path = event.data.plate_thumb_path?.replace(
-        "100.65.31.128"
+        "100.65.31.128",
+        import.meta.env.VITE_APP_API_HOST || "100.65.31.128"
       );
       let start_time = event.start_time;
       if (typeof start_time === "number") {
           start_time = start_time * 1000;
-      } else {
+      } else if (typeof start_time === "object" && start_time["$date"]) {
         start_time = start_time["$date"]
       }
         
-      const start_date = new Date(start_time).toLocaleString("en-US", {
-          timeZone: "UTC",
+      // Create a date in the local timezone
+      const localDate = new Date(start_time);
+      
+      // Adjust for UTC+7
+      const utcPlus7Date = new Date(localDate.getTime() - (7 * 60 * 60 * 1000));
+      
+      // Format the date in a consistent way
+      const start_date = utcPlus7Date.toLocaleString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit",

@@ -3,10 +3,10 @@ import { Grid, Box, Typography } from "@mui/material";
 
 import StatCard from "../../../components/Dashboard/Overview/StatCard";
 import VideocamIcon from "@mui/icons-material/Videocam";
-import NewReleasesIcon from "@mui/icons-material/NewReleases";
-import PreviewIcon from "@mui/icons-material/Preview";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import SignpostIcon from "@mui/icons-material/Signpost";
 import { apiGetCamera } from "../../../connectDB/axios";
+
 const statistics_org = [
   {
     icon: <VideocamIcon />,
@@ -16,25 +16,18 @@ const statistics_org = [
     bgColor: "#0099FF",
   },
   {
-    icon: <NewReleasesIcon />,
+    icon: <VpnKeyIcon />,
     value: "0",
-    label: "Total Alerts",
+    label: "License Plates",
     id: "total_alerts",
+    bgColor: "#1976d2",
+  },
+  {
+    icon: <SignpostIcon />,
+    value: "0",
+    label: "Wrong Direction",
+    id: "total_wrong_direction",
     bgColor: "#FF9900",
-  },
-  {
-    icon: <PreviewIcon />,
-    value: "0",
-    label: "Total Reviewd",
-    id: "total_reviewed",
-    bgColor: "#33CC66",
-  },
-  {
-    icon: <AssignmentTurnedInIcon />,
-    value: "0",
-    label: "Total Resolved",
-    id: "total_resolved",
-    bgColor: "#FF99FF",
   },
 ];
 
@@ -48,13 +41,11 @@ function StatHeadManager({totalStats}) {
   useEffect(() => {
     const updatedStatistics = statistics.map((stat) => {
       if (stat.id === "total_cameras") {
-        return { ...stat, value: totalStats.total_cameras };
+        return { ...stat, value: totalStats.total_cameras || 0 };
       } else if (stat.id === "total_alerts") {
-        return { ...stat, value: totalStats.total_alerts };
-      } else if (stat.id === "total_reviewed") {
-        return { ...stat, value: totalStats.total_reviewed };
-      } else if (stat.id === "total_resolved") {
-        return { ...stat, value: totalStats.total_resolved };
+        return { ...stat, value: totalStats.total_alerts || 0 };
+      } else if (stat.id === "total_wrong_direction") {
+        return { ...stat, value: totalStats.total_wrong_direction || 0 };
       }
       return stat;
     });
@@ -65,7 +56,7 @@ function StatHeadManager({totalStats}) {
     <>
       <Grid container spacing={3} justifyContent="center">
         {statistics.map((stat, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Grid item xs={12} sm={6} md={4} key={index}>
             <StatCard {...stat} />
           </Grid>
         ))}
